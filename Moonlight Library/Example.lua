@@ -1,7 +1,6 @@
 local Loading = loadstring(game:HttpGet("https://raw.githubusercontent.com/GlobeReverse/Lua/main/Moonlight%20Library/Source.lua"))()
 local Library = Loading.Create({ Title = "Moonlight Hub" })
 
---# Alot More Features Coming Soon!
 local Window = Library:Window("Window 1") do 
     local Button = Window:Button({ Title = "Button Example", Description = "Wsp This Is A Button" }, function()
         warn("Button Has Been Clicked")
@@ -11,7 +10,7 @@ local Window = Library:Window("Window 1") do
         for index = 1, 30 do 
             task.wait(1) 
             Button:SetTitle("Title Set " .. index)
-            Button:SetDescription(index * 69)
+            Button:SetDescription(tostring(index * 69))
         end
     end)
 
