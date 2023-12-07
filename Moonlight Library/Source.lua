@@ -89,7 +89,7 @@
 
 			--# Configure Instances
 			Library.Name = "Library"
-			Library.Parent = RunService:IsStudio() and client:WaitForChild("PlayerGui") or CoreGui
+			Library.Parent = CoreGui
 			Library.Enabled = true
 			Library.IgnoreGuiInset = false 
 			Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
