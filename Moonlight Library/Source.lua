@@ -89,7 +89,7 @@
 
 			--# Configure Instances
 			Library.Name = "Library"
-			Library.Parent = client:WaitForChild("PlayerGui")
+			Library.Parent = RunService:IsStudio() and client:WaitForChild("PlayerGui") or CoreGui
 			Library.Enabled = true
 			Library.IgnoreGuiInset = false 
 			Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -234,7 +234,7 @@
 
 			--# Configure Instances
 			Window.Name = WindowName
-			Window.Parent = RunService:IsStudio() and WindowDirectory:WaitForChild("Frame"):WaitForChild("Components"):WaitForChild("Windows") or CoreGui
+			Window.Parent = WindowDirectory:WaitForChild("Frame"):WaitForChild("Components"):WaitForChild("Windows")
 
 			ScrollingWindow.Name = "ScrollingWindow"
 			ScrollingWindow.Parent = Window
