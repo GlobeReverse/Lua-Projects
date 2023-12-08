@@ -20,19 +20,16 @@ local function GetLibrary()
 	local TweenService = service "TweenService"
 	
 	--# Variables
-	local library = { Signals = {}, Options = {}, Toggles = {} } 
+	local library = { Options = {}, Toggles = {} } 
 	library.__index = library
 
 	local client = Players.LocalPlayer
 	local mouse = client:GetMouse()
 	
-	--# Fucntions 
-	local function tween(object, goal) -- For Toggling Objects Of The Menu Menu
-		TweenService:Create(object, TweenInfo.new(0.5), goal):play()
-	end
+	local Signals = {}
+	local CurrentWindow = nil
 	
 	--# Handler
-	local CurrentWindow = nil
 	local function ChangeWindow(window)
 		if CurrentWindow == window then return end 
 
@@ -322,19 +319,19 @@ local function GetLibrary()
 				ChangeWindow(name)
 			end
 
-			table.insert(library.Signals, Tab.MouseEnter:Connect(function()
+			table.insert(Signals, Tab.MouseEnter:Connect(function()
 				if CurrentWindow ~= name then 
 					Text.TextColor3 = Color3.fromRGB(82, 81, 83)
 				end
 			end))
 
-			table.insert(library.Signals, Tab.MouseLeave:Connect(function()
+			table.insert(Signals, Tab.MouseLeave:Connect(function()
 				if CurrentWindow ~= name then 
 					Text.TextColor3 = Color3.fromRGB(62, 61, 63)
 				end
 			end))
 
-			table.insert(library.Signals, Tab.MouseButton1Click:Connect(function()
+			table.insert(Signals, Tab.MouseButton1Click:Connect(function()
 				ChangeWindow(name)
 			end))
 		end
@@ -404,15 +401,15 @@ local function GetLibrary()
 
 			--# Handlers
 
-			table.insert(library.Signals, Button.MouseEnter:Connect(function()
+			table.insert(Signals, Button.MouseEnter:Connect(function()
 				Border.Color = Color3.fromRGB(62, 62, 62)
 			end))
 
-			table.insert(library.Signals, Button.MouseLeave:Connect(function()
+			table.insert(Signals, Button.MouseLeave:Connect(function()
 				Border.Color = Color3.fromRGB(29, 24, 31)
 			end))
 
-			table.insert(library.Signals, Button.MouseButton1Click:Connect(Callback))
+			table.insert(Signals, Button.MouseButton1Click:Connect(Callback))
 
 			--# Functions
 			function funcs:SetTitle(title)
@@ -537,15 +534,15 @@ local function GetLibrary()
 				end
 			end
 
-			table.insert(library.Signals, Vector.MouseButton1Click:Connect(function()
+			table.insert(Signals, Vector.MouseButton1Click:Connect(function()
 				SetValue(not Value)
 			end))
 
-			table.insert(library.Signals, Vector.MouseEnter:Connect(function()
+			table.insert(Signals, Vector.MouseEnter:Connect(function()
 				Border_2.Color = Color3.fromRGB(62, 62, 62)
 			end))
 
-			table.insert(library.Signals, Vector.MouseLeave:Connect(function()
+			table.insert(Signals, Vector.MouseLeave:Connect(function()
 				Border_2.Color = Color3.fromRGB(29, 24, 31)
 			end))
 
@@ -694,15 +691,15 @@ local function GetLibrary()
 				end
 			end
 
-			table.insert(library.Signals, Text.MouseEnter:Connect(function()
+			table.insert(Signals, Text.MouseEnter:Connect(function()
 				Border_2.Color = Color3.fromRGB(62, 62, 62)
 			end))
 
-			table.insert(library.Signals, Text.MouseLeave:Connect(function()
+			table.insert(Signals, Text.MouseLeave:Connect(function()
 				Border_2.Color = Color3.fromRGB(29, 24, 31)
 			end))
 
-			table.insert(library.Signals, Text:GetPropertyChangedSignal("Text"):Connect(function()
+			table.insert(Signals, Text:GetPropertyChangedSignal("Text"):Connect(function()
 				SetValue(Text.Text)
 			end))
 
@@ -903,7 +900,7 @@ local function GetLibrary()
 				end
 			end
 
-			table.insert(library.Signals, Frame1.InputBegan:Connect(function(input)
+			table.insert(Signals, Frame1.InputBegan:Connect(function(input)
 				if input.UserInputType == Enum.UserInputType.MouseButton1 then
 					while task.wait() and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
 						local sliderPos = Frame2.AbsolutePosition.X
@@ -921,7 +918,7 @@ local function GetLibrary()
 				end
 			end))
 
-			table.insert(library.Signals, Current:GetPropertyChangedSignal("Text"):Connect(function()
+			table.insert(Signals, Current:GetPropertyChangedSignal("Text"):Connect(function()
 				if tonumber(Current.Text) then
 					local Amount = tonumber(Current.Text)
 
@@ -1084,16 +1081,16 @@ local function GetLibrary()
 				end
 			end
 
-			table.insert(library.Signals, Toggle.MouseEnter:Connect(function()
+			table.insert(Signals, Toggle.MouseEnter:Connect(function()
 				Border_2.Color = Color3.fromRGB(62, 62, 62)
 			end))
 
-			table.insert(library.Signals, Toggle.MouseLeave:Connect(function()
+			table.insert(Signals, Toggle.MouseLeave:Connect(function()
 				Border_2.Color = Color3.fromRGB(29, 24, 31)
 			end))
 
 
-			table.insert(library.Signals, Toggle.InputBegan:Connect(function(input)  
+			table.insert(Signals, Toggle.InputBegan:Connect(function(input)  
 				if input.UserInputType == Enum.UserInputType.MouseButton1 then
 					editing = true 
 					Value = nil 
@@ -1104,7 +1101,7 @@ local function GetLibrary()
 				end
 			end))
 
-			table.insert(library.Signals, UserInputService.InputBegan:Connect(function(input, event)  
+			table.insert(Signals, UserInputService.InputBegan:Connect(function(input, event)  
 				if not event then 
 					if input.UserInputType == Enum.UserInputType.Keyboard then
 						if input.KeyCode.Name == Value or input.KeyCode == Value then 
@@ -1179,6 +1176,10 @@ local function GetLibrary()
 		return functions
 	end
 	
+	local function tween(object, goal) -- For Toggling The Menu
+		TweenService:Create(object, TweenInfo.new(0.5), goal):play()
+	end
+	
 	function library:Toggle()
 		if self.Library.Frame.ClipsDescendants == false then 
 			self.Library.Frame.ClipsDescendants = true 
@@ -1228,20 +1229,16 @@ local function GetLibrary()
 	end
 	
 	function library:Unload()
-		for index, signal in pairs(self.Signals) do 
+		for index, signal in pairs(Signals) do 
 			signal:Disconnect()
 		end
 
 		self.Library:Remove()
 		self.Library = nil 
-		self.Signals = nil 
 		self.Options = nil 
 		self.Toggles = nil
+		Signals = nil 
 		self = nil 
-	end
-	
-	function library:LoadSettings()
-		
 	end
 	
 	--# Returning
