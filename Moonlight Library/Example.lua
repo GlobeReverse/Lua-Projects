@@ -31,7 +31,7 @@ local Window = Library:Window("Window 1") do
 	end)
 	
 	for x = 1,10 do 
-		Window:Toggle()
+		Window:Toggle({ Title = x })
 	end
 end
 
