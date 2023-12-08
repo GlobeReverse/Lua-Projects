@@ -1,5 +1,5 @@
 # Moonlight Hub GUI Library
-Used In The Script Hub [Moonlight Hub](https://moonlighthub.wtf/)
+Used In The Free Script Hub [Moonlight Hub](https://moonlighthub.wtf/)
 ## Example
 - [Here](https://github.com/GlobeReverse/Lua/blob/main/Moonlight%20Library/Example.lua) Is A Example Of How The UI Is Used (Docs Will Be Made In The Future)
   
