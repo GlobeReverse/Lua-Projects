@@ -29,6 +29,10 @@ local Window = Library:Window("Window 1") do
 	local Slider = Window:Slider({ Title = "Sliderrrrr", Description = "Brrrrrr", Default = 69, Max = 200 }, function(value)
 		warn(value .. " Is The Value Of This Slider!")
 	end)
+	
+	for x = 1,10 do 
+		Window:Toggle()
+	end
 end
 
 local SecondWindow = Library:Window("Window 2") do 
