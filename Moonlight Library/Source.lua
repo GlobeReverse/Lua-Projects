@@ -1,9 +1,9 @@
---# KNOWN ISSUES (Will Be Fixed ASAP) (This Was All Made In 6 Hours Leave Me Alone, I Still Have To Work On It Alot)
+local function GetLibrary() 
+	--# KNOWN ISSUES (Will Be Fixed ASAP) (This Was All Made In 6 Hours Leave Me Alone, I Still Have To Work On It Alot)
 	--[[
 	     1) - Keybind text might expand out of frame 
 	     2) - Alot Of Features Coming As Only In Beta
-	     3) - Scrolling Cannot Go All The Way Down 
-	     4) - Cannot Set Slider Minimum Value
+	     3) - Cannot Set Slider Minimum Value
 	]]
 	
 	--# Services
@@ -89,7 +89,7 @@
 
 			--# Configure Instances
 			Library.Name = "Library"
-			Library.Parent = CoreGui
+			Library.Parent = RunService:IsStudio() and client:WaitForChild("PlayerGui") or CoreGui
 			Library.Enabled = true
 			Library.IgnoreGuiInset = false 
 			Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -246,7 +246,7 @@
 			ScrollingWindow.BorderSizePixel = 0
 			ScrollingWindow.Position = UDim2.new(0.229, 0, 0.017, 0)
 			ScrollingWindow.Size = UDim2.new(0, 509, 0, 411)
-			ScrollingWindow.CanvasSize = UDim2.new(0, 0, 0, 0)
+			ScrollingWindow.CanvasSize = UDim2.new(0, 0, 1.1, 0)
 			ScrollingWindow.ScrollBarThickness = 0
 			ScrollingWindow.AutomaticCanvasSize = Enum.AutomaticSize.Y
 
@@ -746,12 +746,12 @@
 			local Title = configuration and configuration.Title or "Title"
 			local Description = configuration and configuration.Description or "Description"
 			local Value = configuration and configuration.Default or 10
-			local Min = --[[configuration and configuration.Min or ]]1 
+			local Min = --[[configuration and configuration.Min or ]]1
 			local Max = configuration and configuration.Max or 100 
 			local Callback = callback or function(...) return (...) end 
 
 			local funcs = {} 
-
+			
 			if Min > Max then 
 				Min = Max 
 			end
@@ -769,7 +769,7 @@
 			local Border = Instance.new("UIStroke")
 			local Content = Instance.new("Frame")
 			local Title_2 = Instance.new("Frame")
-			local Current = Instance.new("TextLabel")
+			local Current = Instance.new("TextBox")-- Instance.new("TextLabel")
 			local Maximum = Instance.new("TextLabel")
 			local Heading = Instance.new("TextLabel")
 			local Description_2 = Instance.new("TextLabel")
@@ -811,6 +811,7 @@
 			Current.BorderSizePixel = 0
 			Current.Position = UDim2.new(0, 414, 0, 0)
 			Current.Size = UDim2.new(0, 14, 0, 13)
+			Current.ClearTextOnFocus = false
 			Current.Font = Enum.Font.Montserrat
 			Current.Text = Value
 			Current.TextColor3 = Color3.fromRGB(147, 140, 149)
@@ -878,10 +879,18 @@
 
 			--# Handlers
 			local function valueToPercent(value)
-				return math.round((value / Max) * 100)
+				return (value / Max) * 100
 			end
 
 			local function SetValue(value, ignorecallback)
+				if value > Max then 
+					value = Max
+				end
+				
+				if value < Min then 
+					value = Min
+				end
+				
 				library.Options[Title] = math.round((value / 100) * Max) 
 
 				Current.Text = tostring(math.round((value / 100) * Max))
@@ -904,11 +913,27 @@
 
 						local maxPos = math.clamp((mouse.X - sliderPos) / (rightBoundary - sliderPos), 0, Min)
 
-						local val = (((Max - Min) * maxPos) / ((Max - Min) / (99))) + Min
+						local val = (((Max - Min) * maxPos) / ((Max - Min) / (100))) + (Min / 2)
 
 						Value = val 
 						SetValue(val)
 					end
+				end
+			end))
+
+			table.insert(library.Signals, Current:GetPropertyChangedSignal("Text"):Connect(function()
+				if tonumber(Current.Text) then
+					local Amount = tonumber(Current.Text)
+
+					if Amount > Max then 
+						Amount = Max
+					end
+
+					if Amount < Min then 
+						Amount = Min
+					end
+
+					SetValue(valueToPercent(Amount))
 				end
 			end))
 
@@ -1214,6 +1239,13 @@
 		self.Toggles = nil
 		self = nil 
 	end
-
+	
+	function library:LoadSettings()
+		
+	end
+	
 	--# Returning
 	return library
+end
+
+return GetLibrary()
