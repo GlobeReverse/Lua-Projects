@@ -2,7 +2,7 @@ local function GetLibrary()
 	--# KNOWN ISSUES (Will Be Fixed ASAP) (This Was All Made In 6 Hours Leave Me Alone, I Still Have To Work On It Alot)
 	--[[
 	     1) - Keybind text might expand out of frame 
-	     2) - Alot Of Features Coming As Only In Beta
+	     2) - Alot Of Features Coming As Only In Beta (Colorpickers, Dropdowns, Anything Else I Can Think Of)
 	     3) - Cannot Set Slider Minimum Value
 	]]
 	
