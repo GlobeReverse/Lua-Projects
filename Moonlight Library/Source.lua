@@ -243,7 +243,7 @@ local function GetLibrary()
 			ScrollingWindow.BorderSizePixel = 0
 			ScrollingWindow.Position = UDim2.new(0.229, 0, 0.017, 0)
 			ScrollingWindow.Size = UDim2.new(0, 509, 0, 411)
-			ScrollingWindow.CanvasSize = UDim2.new(0, 0, 1.1, 0)
+			ScrollingWindow.CanvasSize = UDim2.new(0, 0, 0, 0)--UDim2.new(0, 0, 1.1, 0)
 			ScrollingWindow.ScrollBarThickness = 0
 			ScrollingWindow.AutomaticCanvasSize = Enum.AutomaticSize.Y
 
@@ -259,6 +259,13 @@ local function GetLibrary()
 			UIListLayout.Parent = HandlerWindow
 			UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 			UIListLayout.Padding = UDim.new(0.0299999993, 0)
+			
+			--# There Is Deffinetly A Better Method To This But IDGAF
+			HandlerWindow.ChildAdded:Connect(function()
+				if ScrollingWindow.AbsoluteCanvasSize.Y > 411 then 
+					ScrollingWindow.CanvasSize = UDim2.new(0, 0, 1.1, 0)
+				end
+			end)
 		end
 
 		do --# Create Sidebar Instances
@@ -925,9 +932,9 @@ local function GetLibrary()
 					SetValue(valueToPercent(Amount))
 				end
 			end))
-
-			SetValue(valueToPercent(Value))
-
+			
+			SetValue(valueToPercent(Value), true)
+			
 			--# Functions
 			function funcs:SetTitle(title)
 				if title and typeof(title) == 'string' then 
