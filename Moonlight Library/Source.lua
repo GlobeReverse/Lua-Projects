@@ -880,14 +880,6 @@ local function GetLibrary()
 			end
 
 			local function SetValue(value, ignorecallback)
-				if value > Max then 
-					value = Max
-				end
-				
-				if value < Min then 
-					value = Min
-				end
-				
 				library.Options[Title] = math.round((value / 100) * Max) 
 
 				Current.Text = tostring(math.round((value / 100) * Max))
