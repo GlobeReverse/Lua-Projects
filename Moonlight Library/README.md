@@ -4,7 +4,7 @@ Used In The Free Script Hub [Moonlight Hub](https://moonlighthub.wtf/)
 - [Here](https://github.com/GlobeReverse/Lua/blob/main/Moonlight%20Library/Example.lua) Is A Example Of How The UI Is Used (Docs Will Be Made In The Future)
 
 ## Features
-- The Moonlight GUi Is A Simple Yet Clean Designed GUI With Easy Documentation To Follow
+- The Moonlight GUI Is A Simple Yet Clean Designed GUI With Easy Documentation To Follow
 - Comes With All The Necessary Elements Such As Dropdowns, Sliders, Toggles, Colorpickers, Ext
   
 ## GUI Preview
