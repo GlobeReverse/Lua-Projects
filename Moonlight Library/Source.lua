@@ -1,5 +1,5 @@
 local function GetLibrary() 
-	--# Todo (This Was All Made In 6 Hours Leave Me Alone, I Still Have To Work On It Alot)
+	--# KNOWN ISSUES (Will Be Fixed ASAP) (This Was All Made In 6 Hours Leave Me Alone, I Still Have To Work On It Alot)
 	--[[
 	     1) - Keybind text might expand out of frame 
 	     2) - Alot Of Features Coming As Only In Beta (Colorpickers, Dropdowns, Built In Settings Window, Anything Else I Can Think Of)
@@ -22,7 +22,16 @@ local function GetLibrary()
 	--# Variables
 	local library = { Options = {}, Toggles = {} } 
 	library.__index = library
+	
+	local librarydesign = {
+		BackgroundColor = Color3.fromRGB(14, 12, 15),
+		OutlineColor = Color3.fromRGB(29, 24, 31),
+		TitleColor = Color3.fromRGB(147, 140, 150),
+		DescriptionColor = Color3.fromRGB(62, 61, 63),
 
+		Font = Enum.Font.Montserrat
+	}
+	
 	local client = Players.LocalPlayer
 	local mouse = client:GetMouse()
 	
@@ -55,7 +64,8 @@ local function GetLibrary()
 
 		CurrentWindow = window
 	end
-
+	
+	
 	function library.Create(configuration) 
 		--# Variables
 		local Title = configuration and configuration.Title or "Moonlight Hub"
@@ -93,7 +103,7 @@ local function GetLibrary()
 
 			Frame.Parent = Library
 			Frame.AnchorPoint = Vector2.new(0.5, 0.5)
-			Frame.BackgroundColor3 = Color3.fromRGB(14, 12, 15)
+			Frame.BackgroundColor3 = librarydesign.BackgroundColor
 			Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Frame.BorderSizePixel = 0
 			Frame.Position = UDim2.new(0.596798241, -130, 0.472668797, 16)
@@ -167,7 +177,7 @@ local function GetLibrary()
 			Header.BorderSizePixel = 0
 			Header.Position = UDim2.new(0, 0, 0, 25)
 			Header.Size = UDim2.new(1.33999956, -50, 0, 14)
-			Header.Font = Enum.Font.Montserrat
+			Header.Font = Enum.Font.Gotham
 			Header.Text = Title
 			Header.TextColor3 = Color3.fromRGB(217, 213, 219)
 			Header.TextSize = 14.000
@@ -286,6 +296,7 @@ local function GetLibrary()
 			Tab.Size = UDim2.new(0, 150, 0, 25)
 			Tab.Font = Enum.Font.SourceSans
 			Tab.TextColor3 = Color3.fromRGB(0, 0, 0)
+			Tab.TextTransparency = 1
 			Tab.TextSize = 14.000
 
 			Text.Name = "Text"
@@ -343,7 +354,7 @@ local function GetLibrary()
 			end))
 		end
 
-		--# Handlers 
+		--# Handlers 		
 		function functions:Button(configuration, callback) 
 			--# Variables
 			local Title = configuration and configuration.Title or "Title"
@@ -610,8 +621,9 @@ local function GetLibrary()
 			--# Configure Instances
 			TextInput.Name = "Text Input"
 			TextInput.Parent = WindowDirectory:WaitForChild("Frame"):WaitForChild("Components"):WaitForChild("Windows")[WindowName]:WaitForChild("ScrollingWindow"):WaitForChild("HandlerWindow")
-			TextInput.BackgroundColor3 = Color3.fromRGB(14, 12, 15)
+			TextInput.BackgroundColor3 = librarydesign.BackgroundColor
 			TextInput.BorderSizePixel = 0
+			TextInput.BackgroundTransparency = 1
 			TextInput.Size = UDim2.new(0, 460, 0, 99)
 
 			Border.Name = "Border"
@@ -784,8 +796,9 @@ local function GetLibrary()
 			--# Configure Instances
 			Slider.Name = "Slider"
 			Slider.Parent = WindowDirectory:WaitForChild("Frame"):WaitForChild("Components"):WaitForChild("Windows")[WindowName]:WaitForChild("ScrollingWindow"):WaitForChild("HandlerWindow")
-			Slider.BackgroundColor3 = Color3.fromRGB(14, 12, 15)
+			Slider.BackgroundColor3 = librarydesign.BackgroundColor
 			Slider.BorderSizePixel = 0
+			Slider.BackgroundTransparency = 1
 			Slider.Size = UDim2.new(0, 460, 0, 67)
 
 			Border.Name = "Border"
@@ -1072,8 +1085,8 @@ local function GetLibrary()
 
 				Value = value
 
-				Status.Size = UDim2.new(0, Status.TextBounds.X + 8, 0, 15) 
-				Toggle.Size = UDim2.new(0, Status.TextBounds.X + 8, 0, 15) 
+				Status.Size = UDim2.new(0, math.clamp(Status.TextBounds.X + 8, 0, 40), 0, 15) 
+				Toggle.Size = UDim2.new(0, math.clamp(Status.TextBounds.X + 8, 0, 40), 0, 15) 
 
 				if not ignorecallback then 
 					Callback()
@@ -1119,6 +1132,9 @@ local function GetLibrary()
 		end
 
 		function functions:Label(text)
+			--# Variables
+			local funcs = {}
+			
 			--# Create Instances
 			local TextLabel = Instance.new("Frame")
 			local TextLabel_2 = Instance.new("TextLabel")
@@ -1145,6 +1161,16 @@ local function GetLibrary()
 			TextLabel_2.TextColor3 = Color3.fromRGB(162, 162, 162)
 			TextLabel_2.TextSize = 12.000
 			TextLabel_2.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+			
+			--# Functions
+			function funcs:SetText(text)
+				if text and typeof(text) == 'string' then 
+					TextLabel_2.Text = text
+				end
+			end
+			
+			--# Returning
+			return funcs
 		end
 
 		function functions:Divider()
@@ -1170,7 +1196,20 @@ local function GetLibrary()
 			Looks.Position = UDim2.new(0, 0, 0.413793117, 0)
 			Looks.Size = UDim2.new(0, 460, 0, 3)
 		end
+		
+		function functions:AddDependencyBox()
+			local handler = {}
+			handler.__index = handler
 
+			function handler:SetupDependencies(index, value)
+				if index == value then 
+
+				end
+			end
+
+			return setmetatable(functions, handler)
+		end
+		
 		--# Returning
 		return functions
 	end
@@ -1231,13 +1270,14 @@ local function GetLibrary()
 		for index, signal in pairs(Signals) do 
 			signal:Disconnect()
 		end
-
+		
 		self.Library:Remove()
 		self.Library = nil 
 		self.Options = nil 
 		self.Toggles = nil
-		Signals = nil 
 		self = nil 
+		
+		Signals = nil 
 	end
 	
 	--# Returning
