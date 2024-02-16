@@ -542,6 +542,7 @@ local function GetLibrary()
 
 			--# Handlers
 			local function SetValue(bool, ignorecallback)
+                print("Set Toggle")
 				library.Toggles[Title] = bool 
 
 				Value = bool 
