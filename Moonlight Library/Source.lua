@@ -1,8 +1,9 @@
 local function GetLibrary() 
 	--# KNOWN ISSUES (Will Be Fixed ASAP) (This Was All Made In 6 Hours Leave Me Alone, I Still Have To Work On It Alot)
 	--[[
-	     1) - Alot Of Features Coming As Only In Beta (Colorpickers, Dropdowns, Built In Settings Window, Anything Else I Can Think Of)
-	     2) - Cannot Set Slider Minimum Value
+	     1) - Keybind text might expand out of frame 
+	     2) - Alot Of Features Coming As Only In Beta (Colorpickers, Dropdowns, Built In Settings Window, Anything Else I Can Think Of)
+	     3) - Cannot Set Slider Minimum Value
 	]]
 	
 	--# Services
@@ -176,10 +177,10 @@ local function GetLibrary()
 			Header.BorderSizePixel = 0
 			Header.Position = UDim2.new(0, 0, 0, 25)
 			Header.Size = UDim2.new(1.33999956, -50, 0, 14)
-			Header.Font = Enum.Font.Gotham
+			Header.Font = Enum.Font.Montserrat
 			Header.Text = Title
 			Header.TextColor3 = Color3.fromRGB(217, 213, 219)
-			Header.TextSize = 14.000
+			Header.TextSize = 16
 
 			Hitbox.Name = "Hitbox"
 			Hitbox.Parent = Logo
@@ -997,7 +998,16 @@ local function GetLibrary()
 			local Toggle = Instance.new("Frame")
 			local Border_2 = Instance.new("UIStroke")
 			local Status = Instance.new("TextLabel")
-
+			local Mode = Instance.new("ScreenGui")
+			local Main = Instance.new("Frame")
+			local UIListLayout = Instance.new("UIListLayout")
+			local Toggle_2 = Instance.new("TextButton")
+			local Vector = Instance.new("ImageButton")
+			local Always = Instance.new("TextButton")
+			local Vector_2 = Instance.new("ImageButton")
+			local Hold = Instance.new("TextButton")
+			local Vector_3 = Instance.new("ImageButton")
+			
 			--# Configure Instances
 			Keybind.Name = "Keybind"
 			Keybind.Parent = WindowDirectory:WaitForChild("Frame"):WaitForChild("Components"):WaitForChild("Windows")[WindowName]:WaitForChild("ScrollingWindow"):WaitForChild("HandlerWindow")
@@ -1006,7 +1016,94 @@ local function GetLibrary()
 			Keybind.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Keybind.BorderSizePixel = 0
 			Keybind.Size = UDim2.new(0, 460, 0, 57)
+			
+			Mode.Name = "Mode"
+			Mode.Parent = Keybind
+			Mode.Enabled = false
+			Mode.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
+			Main.Name = "Main"
+			Main.Parent = Mode
+			Main.BackgroundColor3 = Color3.fromRGB(14, 12, 15)
+			Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Main.BorderSizePixel = 0
+			Main.Position = UDim2.new(0.774923623, 0, 0.307299644, 0)
+			Main.Size = UDim2.new(0, 125, 0, 56)
+
+			UIListLayout.Parent = Main
+			UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+			Toggle_2.Name = "Toggle"
+			Toggle_2.Parent = Main
+			Toggle_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Toggle_2.BackgroundTransparency = 1.000
+			Toggle_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Toggle_2.BorderSizePixel = 0
+			Toggle_2.Size = UDim2.new(0, 125, 0, 18)
+			Toggle_2.Font = Enum.Font.SourceSans
+			Toggle_2.Text = "Toggle"
+			Toggle_2.TextColor3 = Color3.fromRGB(147, 140, 150)
+			Toggle_2.TextSize = 14.000
+
+			Vector.Name = "Vector"
+			Vector.Parent = Toggle_2
+			Vector.BackgroundTransparency = 1.000
+			Vector.Position = UDim2.new(0, 82, 0, 2)
+			Vector.Size = UDim2.new(0, 15, 0, 15)
+			Vector.ZIndex = 2
+			Vector.Image = "rbxassetid://3926305904"
+			Vector.ImageColor3 = Color3.fromRGB(98, 94, 91)
+			Vector.ImageRectOffset = Vector2.new(312, 4)
+			Vector.ImageRectSize = Vector2.new(24, 24)
+
+			Always.Name = "Always"
+			Always.Parent = Main
+			Always.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Always.BackgroundTransparency = 1.000
+			Always.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Always.BorderSizePixel = 0
+			Always.Size = UDim2.new(0, 125, 0, 18)
+			Always.Font = Enum.Font.SourceSans
+			Always.Text = "Always"
+			Always.TextColor3 = Color3.fromRGB(147, 140, 150)
+			Always.TextSize = 14.000
+
+			Vector_2.Name = "Vector"
+			Vector_2.Parent = Always
+			Vector_2.BackgroundTransparency = 1.000
+			Vector_2.Position = UDim2.new(0, 82, 0, 2)
+			Vector_2.Size = UDim2.new(0, 15, 0, 15)
+			Vector_2.Visible = false
+			Vector_2.ZIndex = 2
+			Vector_2.Image = "rbxassetid://3926305904"
+			Vector_2.ImageColor3 = Color3.fromRGB(98, 94, 91)
+			Vector_2.ImageRectOffset = Vector2.new(312, 4)
+			Vector_2.ImageRectSize = Vector2.new(24, 24)
+
+			Hold.Name = "Hold"
+			Hold.Parent = Main
+			Hold.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Hold.BackgroundTransparency = 1.000
+			Hold.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Hold.BorderSizePixel = 0
+			Hold.Size = UDim2.new(0, 125, 0, 18)
+			Hold.Font = Enum.Font.SourceSans
+			Hold.Text = "Hold"
+			Hold.TextColor3 = Color3.fromRGB(147, 140, 150)
+			Hold.TextSize = 14.000
+
+			Vector_3.Name = "Vector"
+			Vector_3.Parent = Hold
+			Vector_3.BackgroundTransparency = 1.000
+			Vector_3.Position = UDim2.new(0, 82, 0, 2)
+			Vector_3.Size = UDim2.new(0, 15, 0, 15)
+			Vector_3.Visible = false
+			Vector_3.ZIndex = 2
+			Vector_3.Image = "rbxassetid://3926305904"
+			Vector_3.ImageColor3 = Color3.fromRGB(98, 94, 91)
+			Vector_3.ImageRectOffset = Vector2.new(312, 4)
+			Vector_3.ImageRectSize = Vector2.new(24, 24)
+			
 			Border.Name = "Border"
 			Border.Parent = Keybind
 			Border.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
@@ -1126,7 +1223,13 @@ local function GetLibrary()
 					end
 				end
 			end))
-
+			
+			table.insert(Signals, Toggle.InputBegan:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseButton2 then
+					Mode.Enabled = true
+				end
+			end))
+			
 			SetValue(Value, true)
 		end
 
@@ -1195,20 +1298,7 @@ local function GetLibrary()
 			Looks.Position = UDim2.new(0, 0, 0.413793117, 0)
 			Looks.Size = UDim2.new(0, 460, 0, 3)
 		end
-		
-		function functions:AddDependencyBox()
-			local handler = {}
-			handler.__index = handler
 
-			function handler:SetupDependencies(index, value)
-				if index == value then 
-
-				end
-			end
-
-			return setmetatable(functions, handler)
-		end
-		
 		--# Returning
 		return functions
 	end
