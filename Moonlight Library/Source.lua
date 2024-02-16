@@ -20,7 +20,7 @@ local function GetLibrary()
 	local TweenService = service "TweenService"
 	
 	--# Variables
-	local library = { Options = {}, Toggles = {} } 
+	local library = {} 
 	library.__index = library
 	
 	local librarydesign = {
@@ -221,7 +221,7 @@ local function GetLibrary()
 	end
 
 	function library:Window(name, icon) 
-		local functions = {} 
+		local functions = { Options = {}, Toggles = {} } 
 
 		local WindowDirectory = self.Library
 		local WindowName = name or "Window"
@@ -543,7 +543,7 @@ local function GetLibrary()
 			--# Handlers
 			local function SetValue(bool, ignorecallback)
                 print("Set Toggle")
-				library.Toggles[Title] = bool 
+				functions.Toggles[Title] = bool 
 
 				Value = bool 
 				Vector.ImageTransparency = Value and 0 or 1
@@ -702,7 +702,7 @@ local function GetLibrary()
 
 			--# Handlers
 			local function SetValue(value, ignorecallback)
-				library.Options[Title] = value 
+				functions.Options[Title] = value 
 
 				Value = value
 
@@ -901,7 +901,7 @@ local function GetLibrary()
 			end
 
 			local function SetValue(value, ignorecallback)
-				library.Options[Title] = math.round((value / 100) * Max) 
+				functions.Options[Title] = math.round((value / 100) * Max) 
 
 				Current.Text = tostring(math.round((value / 100) * Max))
 				Frame2.Size = UDim2.new((value / 100), 0, 0, 8)
@@ -1172,7 +1172,7 @@ local function GetLibrary()
 
 			--# Handlers
 			local function SetValue(value, ignorecallback)
-				library.Options[Title] = value
+				functions.Options[Title] = value
 
 				if typeof(value) == "EnumItem" then
 					Status.Text = '<b>' .. value.Name .. '</b>'
