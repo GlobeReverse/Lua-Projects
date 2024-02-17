@@ -20,7 +20,7 @@ local function GetLibrary()
 	local TweenService = service "TweenService"
 
 	--# Variables
-	local library = {} 
+	local library = { Options = {}, Toggles = {} }
 	library.__index = library
 
 	local librarydesign = {
@@ -221,7 +221,7 @@ local function GetLibrary()
 	end
 
 	function library:Window(name, icon) 
-		local functions = { Options = {}, Toggles = {} } 
+		local functions = {} 
 
 		local WindowDirectory = self.Library
 		local WindowName = name or "Window"
@@ -542,7 +542,7 @@ local function GetLibrary()
 
 			--# Handlers
 			local function SetValue(bool, ignorecallback)
-				functions.Toggles[Title] = bool 
+				library.Toggles[Title] = bool 
 
 				Value = bool 
 				Vector.ImageTransparency = Value and 0 or 1
@@ -701,7 +701,7 @@ local function GetLibrary()
 
 			--# Handlers
 			local function SetValue(value, ignorecallback)
-				functions.Options[Title] = value 
+				library.Options[Title] = value 
 
 				Value = value
 
@@ -900,7 +900,7 @@ local function GetLibrary()
 			end
 
 			local function SetValue(value, ignorecallback)
-				functions.Options[Title] = math.round((value / 100) * Max) 
+				library.Options[Title] = math.round((value / 100) * Max) 
 
 				Current.Text = tostring(math.round((value / 100) * Max))
 				Frame2.Size = UDim2.new((value / 100), 0, 0, 8)
@@ -1171,7 +1171,7 @@ local function GetLibrary()
 
 			--# Handlers
 			local function SetValue(value, ignorecallback)
-				functions.Options[Title] = value
+				library.Options[Title] = value
 
 				if typeof(value) == "EnumItem" then
 					Status.Text = '<b>' .. value.Name .. '</b>'
@@ -1338,7 +1338,7 @@ local function GetLibrary()
 			
 			--# Handlers
 			local function SetValue(value)
-				functions.Options[Title] = value
+				library.Options[Title] = value
 				
 				if typeof(value) == 'string' then 
 					if table.find(Options, value) then 
