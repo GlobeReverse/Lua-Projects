@@ -5,7 +5,7 @@ local function GetLibrary()
 	     2) - Alot Of Features Coming As Only In Beta (Colorpickers, Dropdowns, Built In Settings Window, Anything Else I Can Think Of)
 	     3) - Cannot Set Slider Minimum Value
 	]]
-	
+
 	--# Services
 	local service = setmetatable({}, {
 		__call = function(self, index)
@@ -18,11 +18,11 @@ local function GetLibrary()
 	local RunService = service "RunService"
 	local CoreGui = service "CoreGui"
 	local TweenService = service "TweenService"
-	
+
 	--# Variables
-	local library = { Options = {}, Toggles = {} } 
+	local library = {} 
 	library.__index = library
-	
+
 	local librarydesign = {
 		BackgroundColor = Color3.fromRGB(14, 12, 15),
 		OutlineColor = Color3.fromRGB(29, 24, 31),
@@ -31,13 +31,13 @@ local function GetLibrary()
 
 		Font = Enum.Font.Montserrat
 	}
-	
+
 	local client = Players.LocalPlayer
 	local mouse = client:GetMouse()
-	
+
 	local Signals = {}
 	local CurrentWindow = nil
-	
+
 	--# Handler
 	local function ChangeWindow(window)
 		if CurrentWindow == window then return end 
@@ -64,13 +64,13 @@ local function GetLibrary()
 
 		CurrentWindow = window
 	end
-	
-	
+
+
 	function library.Create(configuration) 
 		--# Variables
 		local Title = configuration and configuration.Title or "Moonlight Hub"
 		local handler = setmetatable({}, library)
-		
+
 		--# Handlers
 		do --# Create Ui Main Objects
 			--# Create Instances
@@ -202,11 +202,11 @@ local function GetLibrary()
 					offset = Frame.Position - UDim2.new(0, input.Position.X, 0, input.Position.Y)
 				end
 			end)
-			
+
 			Hitbox.InputEnded:Connect(function()
 				offset = nil 
 			end)
-			
+
 			UserInputService.InputChanged:Connect(function(input)
 				if input.UserInputType == Enum.UserInputType.MouseMovement then 
 					if UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and offset then
@@ -221,7 +221,7 @@ local function GetLibrary()
 	end
 
 	function library:Window(name, icon) 
-		local functions = {} 
+		local functions = { Options = {}, Toggles = {} } 
 
 		local WindowDirectory = self.Library
 		local WindowName = name or "Window"
@@ -269,7 +269,7 @@ local function GetLibrary()
 			UIListLayout.Parent = HandlerWindow
 			UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 			UIListLayout.Padding = UDim.new(0.0299999993, 0)
-			
+
 			--# There Is Deffinetly A Better Method To This But IDGAF
 			HandlerWindow.ChildAdded:Connect(function()
 				if ScrollingWindow.AbsoluteCanvasSize.Y > 411 then 
@@ -542,7 +542,7 @@ local function GetLibrary()
 
 			--# Handlers
 			local function SetValue(bool, ignorecallback)
-				library.Toggles[Title] = bool 
+				functions.Toggles[Title] = bool 
 
 				Value = bool 
 				Vector.ImageTransparency = Value and 0 or 1
@@ -701,7 +701,7 @@ local function GetLibrary()
 
 			--# Handlers
 			local function SetValue(value, ignorecallback)
-				library.Options[Title] = value 
+				functions.Options[Title] = value 
 
 				Value = value
 
@@ -767,7 +767,7 @@ local function GetLibrary()
 			local Callback = callback or function(...) return (...) end 
 
 			local funcs = {} 
-			
+
 			if Min > Max then 
 				Min = Max 
 			end
@@ -900,7 +900,7 @@ local function GetLibrary()
 			end
 
 			local function SetValue(value, ignorecallback)
-				library.Options[Title] = math.round((value / 100) * Max) 
+				functions.Options[Title] = math.round((value / 100) * Max) 
 
 				Current.Text = tostring(math.round((value / 100) * Max))
 				Frame2.Size = UDim2.new((value / 100), 0, 0, 8)
@@ -945,9 +945,9 @@ local function GetLibrary()
 					SetValue(valueToPercent(Amount))
 				end
 			end))
-			
+
 			SetValue(valueToPercent(Value), true)
-			
+
 			--# Functions
 			function funcs:SetTitle(title)
 				if title and typeof(title) == 'string' then 
@@ -1007,7 +1007,7 @@ local function GetLibrary()
 			local Vector_2 = Instance.new("ImageButton")
 			local Hold = Instance.new("TextButton")
 			local Vector_3 = Instance.new("ImageButton")
-			
+
 			--# Configure Instances
 			Keybind.Name = "Keybind"
 			Keybind.Parent = WindowDirectory:WaitForChild("Frame"):WaitForChild("Components"):WaitForChild("Windows")[WindowName]:WaitForChild("ScrollingWindow"):WaitForChild("HandlerWindow")
@@ -1016,7 +1016,7 @@ local function GetLibrary()
 			Keybind.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Keybind.BorderSizePixel = 0
 			Keybind.Size = UDim2.new(0, 460, 0, 57)
-			
+
 			Mode.Name = "Mode"
 			Mode.Parent = Keybind
 			Mode.Enabled = false
@@ -1103,7 +1103,7 @@ local function GetLibrary()
 			Vector_3.ImageColor3 = Color3.fromRGB(98, 94, 91)
 			Vector_3.ImageRectOffset = Vector2.new(312, 4)
 			Vector_3.ImageRectSize = Vector2.new(24, 24)
-			
+
 			Border.Name = "Border"
 			Border.Parent = Keybind
 			Border.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
@@ -1171,7 +1171,7 @@ local function GetLibrary()
 
 			--# Handlers
 			local function SetValue(value, ignorecallback)
-				library.Options[Title] = value
+				functions.Options[Title] = value
 
 				if typeof(value) == "EnumItem" then
 					Status.Text = '<b>' .. value.Name .. '</b>'
@@ -1223,20 +1223,144 @@ local function GetLibrary()
 					end
 				end
 			end))
-			
+
 			table.insert(Signals, Toggle.InputBegan:Connect(function(input)
 				if input.UserInputType == Enum.UserInputType.MouseButton2 then
 					Mode.Enabled = true
 				end
 			end))
-			
+
 			SetValue(Value, true)
 		end
 
+		function functions:Dropdown(configuration, callback) 
+			--# Variables
+			local Title = configuration and configuration.Title or "Title"
+			local Description = configuration and configuration.Description or "Description"
+			local Options = configuration and configuration.Options or {}
+			local Enabled = configuration and configuration.Default or {}
+			local Callback = callback or function(...) return (...) end 
+
+			--# Create Instances
+			local Dropdown = Instance.new("Frame")
+			local Border = Instance.new("UIStroke")
+			local Heading = Instance.new("TextLabel")
+			local Description2 = Instance.new("TextLabel")
+			local Toggler = Instance.new("ImageButton")
+			local Options = Instance.new("Frame")
+			local Border_2 = Instance.new("UIStroke")
+			local TextLabel = Instance.new("TextLabel")
+			
+			Dropdown.Name = "Dropdown"
+			Dropdown.Parent = WindowDirectory:WaitForChild("Frame"):WaitForChild("Components"):WaitForChild("Windows")[WindowName]:WaitForChild("ScrollingWindow"):WaitForChild("HandlerWindow")
+			Dropdown.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Dropdown.BackgroundTransparency = 1.000
+			Dropdown.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Dropdown.BorderSizePixel = 0
+			Dropdown.Size = UDim2.new(0, 460, 0, 57)
+
+			Border.Name = "Border"
+			Border.Parent = Dropdown
+			Border.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+			Border.Color = Color3.fromRGB(29, 24, 31)
+			Border.LineJoinMode = Enum.LineJoinMode.Round
+			Border.Thickness = 1
+			
+			Heading.Name = "Heading"
+			Heading.Parent = Dropdown
+			Heading.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Heading.BackgroundTransparency = 1.000
+			Heading.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Heading.BorderSizePixel = 0
+			Heading.Position = UDim2.new(0, 14, 0, 14)
+			Heading.Size = UDim2.new(1, -14, 0, 12)
+			Heading.Font = Enum.Font.Gotham
+			Heading.Text = "Test Dropdown"
+			Heading.TextColor3 = Color3.fromRGB(147, 140, 150)
+			Heading.TextSize = 12.000
+			Heading.TextXAlignment = Enum.TextXAlignment.Left
+
+			Description2.Name = "Description2"
+			Description2.Parent = Dropdown
+			Description2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Description2.BackgroundTransparency = 1.000
+			Description2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Description2.BorderSizePixel = 0
+			Description2.Position = UDim2.new(0, 14, 0, 30)
+			Description2.Size = UDim2.new(1, -14, 0, 12)
+			Description2.Font = Enum.Font.Gotham
+			Description2.Text = "Test Description"
+			Description2.TextColor3 = Color3.fromRGB(62, 61, 63)
+			Description2.TextSize = 12.000
+			Description2.TextXAlignment = Enum.TextXAlignment.Left
+
+			Toggler.Name = "Toggler"
+			Toggler.Parent = Dropdown
+			Toggler.BackgroundTransparency = 1.000
+			Toggler.LayoutOrder = 19
+			Toggler.Position = UDim2.new(0.919565201, 0, 0.282456249, 0)
+			Toggler.Rotation = 90.000
+			Toggler.Size = UDim2.new(0, 25, 0, 25)
+			Toggler.ZIndex = 2
+			Toggler.Image = "rbxassetid://3926305904"
+			Toggler.ImageRectOffset = Vector2.new(724, 284)
+			Toggler.ImageRectSize = Vector2.new(36, 36)
+
+			Options.Name = "Options"
+			Options.Parent = Dropdown
+			Options.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Options.BackgroundTransparency = 1.000
+			Options.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Options.BorderSizePixel = 0
+			Options.Position = UDim2.new(0.74782598, 0, 1.24561405, 0)
+			Options.Size = UDim2.new(0, 116, 0, 23)
+
+			Border_2.Name = "Border"
+			Border_2.Parent = Options
+			Border_2.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+			Border_2.Color = Color3.fromRGB(29, 24, 31)
+			Border_2.LineJoinMode = Enum.LineJoinMode.Round
+			Border_2.Thickness = 1
+			
+			TextLabel.Parent = Options
+			TextLabel.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+			TextLabel.BackgroundTransparency = 0.800
+			TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			TextLabel.BorderSizePixel = 0
+			TextLabel.Position = UDim2.new(-0.00199995376, 0, -0.0300001055, 0)
+			TextLabel.Size = UDim2.new(0, 116, 0, 24)
+			TextLabel.Font = Enum.Font.SourceSans
+			TextLabel.Text = "Head"
+			TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabel.TextSize = 14.000
+			TextLabel.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabel.TextWrapped = true
+			
+			--# Handlers
+			local function SetValue(value)
+				functions.Options[Title] = value
+				
+				if typeof(value) == 'string' then 
+					if table.find(Options, value) then 
+						
+					end
+				else if typeof(value) == "table" then 
+						for i,v in pairs(value) do 
+							if typeof(v) == "string" then 
+								if table.find(Options, value) then 
+
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+		
 		function functions:Label(text)
 			--# Variables
 			local funcs = {}
-			
+
 			--# Create Instances
 			local TextLabel = Instance.new("Frame")
 			local TextLabel_2 = Instance.new("TextLabel")
@@ -1263,14 +1387,14 @@ local function GetLibrary()
 			TextLabel_2.TextColor3 = Color3.fromRGB(162, 162, 162)
 			TextLabel_2.TextSize = 12.000
 			TextLabel_2.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
-			
+
 			--# Functions
 			function funcs:SetText(text)
 				if text and typeof(text) == 'string' then 
 					TextLabel_2.Text = text
 				end
 			end
-			
+
 			--# Returning
 			return funcs
 		end
@@ -1302,11 +1426,11 @@ local function GetLibrary()
 		--# Returning
 		return functions
 	end
-	
+
 	local function tween(object, goal) -- For Toggling The Menu
 		TweenService:Create(object, TweenInfo.new(0.5), goal):play()
 	end
-	
+
 	function library:Toggle()
 		if self.Library.Frame.ClipsDescendants == false then 
 			self.Library.Frame.ClipsDescendants = true 
@@ -1354,21 +1478,21 @@ local function GetLibrary()
 			end
 		end
 	end
-	
+
 	function library:Unload()
 		for index, signal in pairs(Signals) do 
 			signal:Disconnect()
 		end
-		
+
 		self.Library:Remove()
 		self.Library = nil 
 		self.Options = nil 
 		self.Toggles = nil
 		self = nil 
-		
+
 		Signals = nil 
 	end
-	
+
 	--# Returning
 	return library
 end
