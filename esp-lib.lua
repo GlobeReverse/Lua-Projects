@@ -62,7 +62,7 @@ local function esp_library()
 			tracers = false,
 			tracerTransparency = 1,
 			tracerColor = Color3.new(1, 1, 1),
-			tracerOrigin = "Bottom", -- Available [Mouse, Top, Bottom]
+			tracerOrigin = "Middle", -- Available [Mouse, Top, Bottom]
 			chams = false,
 			chamsFillColor = Color3.new(1, 0, 0),
 			chamsFillTransparency = 0.5,
