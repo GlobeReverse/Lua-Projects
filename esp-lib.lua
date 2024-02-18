@@ -537,6 +537,7 @@ local function esp_library()
 					objects.line.From =
 						origin == "Mouse" and userInputService:GetMouseLocation() or
 						origin == "Top" and vector2New(viewportSize.X * 0.5, 0) or
+                        origin == "Middle" and vector2New(viewportSize.X * 0.5, viewportSize.Y * 0.5) or
 						origin == "Bottom" and vector2New(viewportSize.X * 0.5, viewportSize.Y);
 					objects.line.To = torsoPosition;
 				else
