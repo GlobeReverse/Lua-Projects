@@ -72,6 +72,10 @@ local function esp_library()
 	};
 	espLibrary.__index = espLibrary;
 	
+	function espLibrary:SetSetting(idx, value)
+		self.options[idx] = value
+	end
+
 	-- variables
 	local getService = game.GetService;
 	local instanceNew = Instance.new;
