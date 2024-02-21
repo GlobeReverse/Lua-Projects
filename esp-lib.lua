@@ -76,12 +76,12 @@ local function esp_library()
 		self.options[idx] = value
 
         if idx == "enabled" then 
-            self.connection:Disconnect()
+            espLibrary.connection:Disconnect()
 
             if value then 
-                self.connection = runService:BindToRenderStep("esp_rendering", renderValue or (Enum.RenderPriority.Camera.Value + 1), self.run);
+                espLibrary.connection = runService:BindToRenderStep("esp_rendering", renderValue or (Enum.RenderPriority.Camera.Value + 1), espLibrary.run);
             else 
-                self.run()
+                espLibrary.run()
             end
         end
 	end
