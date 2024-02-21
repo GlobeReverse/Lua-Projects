@@ -79,7 +79,7 @@ local function esp_library()
             self.connection:Disconnect()
 
             if value then 
-               self:connect()
+               self.connect(self.run)
             end
         end
 	end
@@ -614,8 +614,8 @@ local function esp_library()
 		runService:UnbindFromRenderStep("esp_rendering");
 	end
 	
-    function espLibrary:connect() 
-        self.connection = runService:BindToRenderStep("esp_rendering", renderValue or (Enum.RenderPriority.Camera.Value + 1), self.run);
+    function espLibrary.connect(func) 
+        self.connection = runService:BindToRenderStep("esp_rendering", renderValue or (Enum.RenderPriority.Camera.Value + 1), func);
     end
 
 	function espLibrary:Load(renderValue)
@@ -634,7 +634,7 @@ local function esp_library()
 			self.addChams(player);
 		end
 	
-		self:connect()
+		self.connect(self.run)
 	end
 	
 	return espLibrary;
