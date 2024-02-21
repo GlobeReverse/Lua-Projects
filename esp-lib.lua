@@ -79,9 +79,9 @@ local function esp_library()
             self.connection:Disconnect()
 
             if value then 
-               self.connect(self.run)
+                self.connection = runService:BindToRenderStep("esp_rendering", renderValue or (Enum.RenderPriority.Camera.Value + 1), function() self:run() end);
             else 
-                self.run()
+                self:run()
             end
         end
 	end
@@ -357,7 +357,7 @@ local function esp_library()
 		end
 	end
 	
-    function espLibrary.run()
+    function espLibrary:run()
         warn("Running Player Esp Loop")
         for player, objects in next, self.espCache do
             local character, torso = self.getCharacter(player);
@@ -636,7 +636,7 @@ local function esp_library()
 			self.addChams(player);
 		end
 	
-		self.connect(self.run)
+		self.connection = runService:BindToRenderStep("esp_rendering", renderValue or (Enum.RenderPriority.Camera.Value + 1), function() self:run() end);
 	end
 	
 	return espLibrary;
