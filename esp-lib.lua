@@ -80,6 +80,8 @@ local function esp_library()
 
             if value then 
                self.connect(self.run)
+            else 
+                self.run()
             end
         end
 	end
