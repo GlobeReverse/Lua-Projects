@@ -636,7 +636,7 @@ local function esp_library()
             end
         end
 
-		self.connection = runService:BindToRenderStep("esp_rendering", renderValue or (Enum.RenderPriority.Camera.Value + 1), self.run);
+		espLibrary.connection = runService:BindToRenderStep("esp_rendering", renderValue or (Enum.RenderPriority.Camera.Value + 1), self.run);
 	end
 	
 	return espLibrary;
