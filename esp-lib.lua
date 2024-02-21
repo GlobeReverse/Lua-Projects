@@ -1,4 +1,4 @@
--- I DID NOT MAKE THIS FUCK MAKING A ESP LIBRARY DHH
+-- I DID NOT MAKE THIS FUCK MAKING A ESP LIBRARY DHH (i just have modified it)
 local function esp_library()
 	local espLibrary = {
 		instances = {},
