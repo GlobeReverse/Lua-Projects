@@ -48,7 +48,7 @@ local ESP_SETTINGS = {
     TracerColor = Color3.new(1, 1, 1), 
     TracerThickness = 2,
     SkeletonsColor = Color3.new(1, 1, 1),
-    TracerPosition = "Bottom",
+    TracerPosition = "Middle",
     MaxDistance = 200
 }
 
