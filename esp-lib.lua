@@ -137,7 +137,6 @@ local function removeEsp(player)
 end
 
 local function updateEsp()
-    warn("Running Player Esp")
     for player, esp in pairs(cache) do
         local character, team = player.Character, player.Team
         if character and (not ESP_SETTINGS.Teamcheck or (team and team ~= localPlayer.Team)) then
