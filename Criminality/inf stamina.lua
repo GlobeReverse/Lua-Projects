@@ -1,3 +1,4 @@
+-- cannot get the function from _G as ro exec dont work like that :(
 for i,v in pairs(getgc()) do 
     if typeof(v) == "function" then 
         local debuginfo = debug.getinfo(v)
