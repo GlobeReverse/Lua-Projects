@@ -57,7 +57,7 @@ local function closestPlayerDistance(maxDistance)
 end
 
 local function onCursor() 
-    return mouse.Target and mouse.Target:IsDescendantOf(Workspace.Characters) or false;
+    return mouse.Target and mouse.Target:IsDescendantOf(client.Character.Parent) or false;
 end
 
 --// Handling
