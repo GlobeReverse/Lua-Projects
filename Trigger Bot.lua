@@ -1,3 +1,7 @@
+--[[
+    [-] - THIS SHIT ONLY WORK ON GAMES THAT DON'T HAVE PLAYERS IN THE WORKSPACE DIRECTORY
+]]
+
 --// Services
 local Players = game:GetService("Players");
 local RunService = game:GetService("RunService");
