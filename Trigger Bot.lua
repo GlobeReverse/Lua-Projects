@@ -63,7 +63,7 @@ end
 --// Handling
 RunService.RenderStepped:Connect(function()
     if isValid(client) then 
-        local closestTarget = closestPlayerDistance()
+        local closestTarget = closestPlayerDistance(max_distance)
 
         if closestTarget then 
             if onCursor(closestTarget) then 
