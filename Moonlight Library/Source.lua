@@ -16,7 +16,6 @@ local function GetLibrary()
 	local Players = service "Players"
 	local UserInputService = service "UserInputService"
 	local RunService = service "RunService"
-	local CoreGui = service "CoreGui"
 	local TweenService = service "TweenService"
 
 	--# Variables
@@ -96,7 +95,7 @@ local function GetLibrary()
 
 			--# Configure Instances
 			Library.Name = "Library"
-			Library.Parent = RunService:IsStudio() and client:WaitForChild("PlayerGui") or CoreGui
+			Library.Parent = client:WaitForChild("PlayerGui")
 			Library.Enabled = true
 			Library.IgnoreGuiInset = false 
 			Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
