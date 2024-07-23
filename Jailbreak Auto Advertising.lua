@@ -32,4 +32,5 @@ end
 
 task.wait(1);
 
-TeleportService:Teleport(game.PlaceId, client);
+--# Credit to whoever made this server hop script
+loadstring(game:HttpGet("https://pastebin.com/raw/HXZUPSj2"))();
