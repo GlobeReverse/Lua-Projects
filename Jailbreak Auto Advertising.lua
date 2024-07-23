@@ -25,7 +25,7 @@ for x = 1, 3 do
 end
 
 queue_on_teleport([[
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/GlobeReverse/Lua-Projects/main/Jailbreak%20Auto%20Advertise.lua"))();
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/GlobeReverse/Lua-Projects/main/Jailbreak%20Auto%Advertising.lua"))();
 ]]);
 
 TeleportService:Teleport(game.PlaceId, client);
