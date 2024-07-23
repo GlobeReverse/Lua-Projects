@@ -20,8 +20,8 @@ local messages = {
 
 --// Handling
 queue_on_teleport([[
-    print("Queue On Teleport");
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/GlobeReverse/Lua-Projects/main/Jailbreak%20Auto%Advertising.lua"))();
+    print("Queue On Teleport Working");
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/GlobeReverse/Lua-Projects/main/Jailbreak%20Auto%20Advertising.lua"))();
 ]]);
 
 for x = 1, 3 do 
