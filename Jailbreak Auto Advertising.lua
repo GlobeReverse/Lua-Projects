@@ -20,13 +20,16 @@ local messages = {
 
 --// Handling
 queue_on_teleport([[
-    print("Queue On Teleport Working");
+    task.wait(3);
+    
     loadstring(game:HttpGet("https://raw.githubusercontent.com/GlobeReverse/Lua-Projects/main/Jailbreak%20Auto%20Advertising.lua"))();
 ]]);
 
-for x = 1, 3 do 
-    task.wait(1);
+for x = 1, 5 do 
+    task.wait(1.25);
     textChannel:SendAsync(messages[math.random(1, #messages)]);
 end
+
+task.wait(1);
 
 TeleportService:Teleport(game.PlaceId, client);
