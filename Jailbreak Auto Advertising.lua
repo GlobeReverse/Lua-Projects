@@ -33,7 +33,7 @@ end
 
 task.wait(1);
 
-local serverList = game:HttpGet(string.format("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=50", game.PlaceId))
+local serverList = game:HttpGet(string.format("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=100", game.PlaceId))
 
 serverList = game.HttpService:JSONDecode(serverList).data
 
