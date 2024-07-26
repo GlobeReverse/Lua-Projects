@@ -35,6 +35,6 @@ task.wait(1);
 
 local serverList = game:HttpGet(string.format("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=50", game.PlaceId))
 
-serverList = game.HttpService:JSONDecode(serverList)
+serverList = game.HttpService:JSONDecode(serverList).data
 
 TeleportService:TeleportToPlaceInstance(game.PlaceId, serverList[math.random(1, #serverList)].id, client)
