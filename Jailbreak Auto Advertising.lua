@@ -7,7 +7,7 @@ local Players = game:GetService("Players");
 --// Variables
 local client = Players.LocalPlayer;
 local textChannel = TextChatService.TextChannels.RBXGeneral;
-local vanity = "testing";
+local vanity = "jailbreakitems";
 
 local messages = {
     `.gg/{vanity} --> join for the lowest priced jailbreak items`,
