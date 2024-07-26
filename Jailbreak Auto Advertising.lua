@@ -26,7 +26,7 @@ queue_on_teleport([[
     loadstring(game:HttpGet("https://raw.githubusercontent.com/GlobeReverse/Lua-Projects/main/Jailbreak%20Auto%20Advertising.lua"))();
 ]]);
 
-for x = 1, 5 do 
+for x = 1, 3 do 
     task.wait(1.25);
     textChannel:SendAsync(messages[math.random(1, #messages)]);
 end
