@@ -1,6 +1,7 @@
 --// Services
 local TextChatService = game:GetService("TextChatService");
 local TeleportService = game:GetService("TeleportService");
+local HttpService = game:GetService("HttpService");
 local Players = game:GetService("Players");
 
 --// Variables
@@ -32,5 +33,8 @@ end
 
 task.wait(1);
 
-TeleportService:Teleport(game.PlaceId, client);
---loadstring(game:HttpGet("https://pastebin.com/raw/HXZUPSj2"))();
+local serverList = game:HttpGet(string.format("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=10", game.PlaceId))
+
+serverList = game.HttpService:JSONDecode(serverList)
+
+TeleportService:TeleportToPlaceInstance(game.PlaceId, serverList[math.random(1, #serverList)].id, client)
