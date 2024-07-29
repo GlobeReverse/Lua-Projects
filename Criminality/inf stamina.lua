@@ -1,4 +1,4 @@
--- cannot get the function from _G as ro exec dont work like that :(
+-- easiest method
 for index, value in pairs(getgc()) do 
     if typeof(value) == "function" then 
         local debuginfo = debug.getinfo(value)
