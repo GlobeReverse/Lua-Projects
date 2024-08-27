@@ -39,27 +39,6 @@ local function screenPosition(position)
     return position;
 end
 
-local function closestPlayerDistance(maxDistance)
-    local target = nil;
-    local distance = maxDistance or 9e9;
-
-    for _, player in pairs(Players:GetPlayers()) do 
-        if (player == client) then continue end;
-        if (isValid(player) ~= true) then continue end; 
-
-        local distanceFromClient = (client.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).magnitude --client:GetDistanceFromCharacter(player.Character.HumanoidRootPart.Position);
-
-        if (distanceFromClient < distance) then
-            if onScreen(player.Character.HumanoidRootPart.Position) then 
-                target = player; 
-                distance = distanceFromClient;
-            end
-        end
-    end
-
-    return target; 
-end
-
 local function onCursor() 
     return mouse.Target and mouse.Target:IsDescendantOf(client.Character.Parent) or false;
 end
@@ -67,21 +46,17 @@ end
 --// Handling
 RunService.RenderStepped:Connect(function()
     if isValid(client) then 
-        local closestTarget = closestPlayerDistance(max_distance);
+        if onCursor() then 
+            if ((tick() - cooldown) > cooldown_wait) then 
+                cooldown = tick();
 
-        if closestTarget then 
-            if onCursor(closestTarget) then 
-                if ((tick() - cooldown) > cooldown_wait) then 
-                    cooldown = tick();
+                mouse1click();
 
-                    mouse1click();
+                task.wait();
 
-                    task.wait();
+                local mousePosition = screenPosition(mouse.Hit.p);
 
-                    local mousePosition = screenPosition(mouse.Hit.p);
-
-                    mousemoverel(mousePosition.X, mousePosition.Y);
-                end
+                mousemoverel(mousePosition.X, mousePosition.Y);
             end
         end
     end
