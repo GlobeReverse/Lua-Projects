@@ -27,12 +27,6 @@ local function isValid(player)
     return true;
 end
 
-local function onScreen(position)
-    local position, onscreen = camera:WorldToScreenPoint(position);
-
-    return onscreen;
-end
-
 local function screenPosition(position)
     local position, onscreen = camera:WorldToScreenPoint(position);
 
