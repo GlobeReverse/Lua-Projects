@@ -1,7 +1,3 @@
---[[
-    [-] - THIS SHIT ONLY WORK ON GAMES THAT DON'T HAVE PLAYERS IN THE WORKSPACE DIRECTORY (IF IN WORKSPACE IT WILL JUST SPAM TRIGGER)
-]]
-
 --// Services
 local Players = game:GetService("Players");
 local RunService = game:GetService("RunService");
@@ -34,7 +30,7 @@ local function screenPosition(position)
 end
 
 local function onCursor() 
-    return mouse.Target and mouse.Target:IsDescendantOf(client.Character.Parent) or false;
+    return mouse.Target and mouse.Target:IsDescendantOf(client.Character.Parent) and mouse.Target:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid") or false;
 end
 
 --// Handling
