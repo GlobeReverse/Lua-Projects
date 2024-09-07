@@ -17,7 +17,7 @@ local function isValid(player)
     if (not player) then return false end; 
     if (not player.Character) then return false end;
 
-    if (player.Character:FindFirstChild("Humanoid") == nil) then return false end;
+    if (not player.Character:FindFirstChild("Humanoid")) then return false end;
     if (player.Character.Humanoid.Health <= 1) then return false end;
 
     return true;
