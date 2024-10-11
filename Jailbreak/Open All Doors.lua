@@ -36,7 +36,7 @@ for _, value: any in pairs(getgc(true)) do
 end
 
 --// Handling
-for instance, data: any in pairs(doors) do 
+for instance: Instance, data: any in pairs(doors) do 
     task.spawn(function()
         while task.wait(0.1) do 
             fireTable:FireServer(converstion.OpenDoor1, "Door", {
