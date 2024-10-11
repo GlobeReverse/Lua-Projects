@@ -1,5 +1,6 @@
 --[[
    Love FPS 😉😉😉😎😎
+   ( Looks alot less buggy on everyone elses device )
 ]]
 
 --// Variables
