@@ -3,8 +3,6 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage");
 local Workspace = game:GetService("Workspace");
 
 --// Variables
-local fallModule = require(ReplicatedStorage.Game.Falling);
-
 local doors = {};
 
 local converstion = {
