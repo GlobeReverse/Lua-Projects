@@ -3,21 +3,21 @@
 ]]
 
 --// Services
-local Players = game:GetService("Players");
-local RunService = game:GetService("RunService");
+local Players: Players = game:GetService("Players");
+local RunService: RunService = game:GetService("RunService");
 
 --// Variables
-local client = Players.LocalPlayer;
+local client: Player = Players.LocalPlayer;
 
-local converstion = {
+local converstion: { [string]: string } = {
     ["EnterVehicle"] = ("q" .. "" .. ("m1dpq1mw"):sub(2, 4):reverse():reverse():reverse() .. "" .. "" .. ("cv0z8hd4"):sub(5, 6):reverse():reverse():reverse() .. "" .. "fy"),
     ["ArrestPlayer"] = ("s" .. "" .. ("hfenz"):sub(4, 4):reverse() .. "" .. "" .. ("lp3idhr5"):sub(2, 4):reverse() .. "" .. "" .. ("frpwfhd"):sub(3, 3):reverse() .. "" .. "" .. ("h3k"):sub(2, 2):reverse() .. "" .. "b")
 }
 
 --// Garbage Collector
-for _, value in pairs(getgc(true)) do 
+for _, value: any in pairs(getgc(true)) do 
     if (typeof(value) == "table") then 
-        local fireServer = rawget(value, "FireServer");
+        local fireServer: any = rawget(value, "FireServer");
 
         if fireServer then 
             fireTable = value;
@@ -26,29 +26,29 @@ for _, value in pairs(getgc(true)) do
 end
 
 --// Functions
-local function arrestPlayer(player)
+local function arrestPlayer(player: Player): ()
     print("Arrested", player.Name);
 
     fireTable:FireServer(converstion.ArrestPlayer, player.Name);
 end
 
-local function canArrest(player)
+local function canArrest(player: Player): boolean
     if (player.Team.Name == "Criminal") then return true end;
     if (player.Team.Name == "Police") then return false end;
 
     return (#player.Folder:GetChildren() ~= 0);
 end
 
-local function closetPlayer(max)
+local function closetPlayer(max: number): Player
     local target; 
-    local maxDistance = max or 9e9;
+    local maxDistance = max;
 
     for _, player in pairs(Players:GetPlayers()) do 
         if (player == client) then continue end;
         if (not player.Character) or (not player.Character:FindFirstChild("HumanoidRootPart")) then continue end;
         if (not canArrest(player)) then continue end; 
 
-        local distance = client:DistanceFromCharacter(player.Character.HumanoidRootPart.Position);
+        local distance: number = client:DistanceFromCharacter(player.Character.HumanoidRootPart.Position);
 
         if (distance < maxDistance) then 
             target = player;
@@ -60,7 +60,7 @@ local function closetPlayer(max)
 end
 
 --// Handling
-RunService.RenderStepped:Connect(function()
+RunService.RenderStepped:Connect(function(): ()
     local target = closetPlayer(20);
 
     if target then 
