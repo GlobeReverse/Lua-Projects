@@ -24,11 +24,11 @@ for _, value: any in pairs(getgc(true)) do
 end
 
 --// Functions
-local function enterVehicle(car: Instance, seat: Instance)
+local function enterVehicle(car: Instance, seat: Instance): ()
     fireTable:FireServer(converstion.EnterVehicle, car, seat);
 end
 
-local function closestCar(max: number)
+local function closestCar(max: number): any
     local vehicle;
     local maxDistance = max; 
 
