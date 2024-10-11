@@ -1,15 +1,15 @@
 --// Services
-local TextChatService = game:GetService("TextChatService");
-local TeleportService = game:GetService("TeleportService");
-local HttpService = game:GetService("HttpService");
-local Players = game:GetService("Players");
+local TextChatService: TextChatService = game:GetService("TextChatService");
+local TeleportService: TeleportService = game:GetService("TeleportService");
+local HttpService: HttpService = game:GetService("HttpService");
+local Players: Players = game:GetService("Players");
 
 --// Variables
-local client = Players.LocalPlayer;
+local client: Player = Players.LocalPlayer;
 local textChannel = TextChatService.TextChannels.RBXGeneral;
-local vanity = "jailbreakitems";
+local vanity: string = "jailbreakitems";
 
-local messages = {
+local messages: { string } = {
     `.gg/{vanity} --> join for the lowest priced jailbreak items`,
     `tired of being poor on jailbreak? join --> .gg/{vanity}`,
     `join the cool kid club and get cheap rare items --> .gg/{vanity}`,
@@ -33,8 +33,8 @@ end
 
 task.wait(1);
 
-local serverList = game:HttpGet(string.format("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=100", game.PlaceId))
+local serverList: any = game:HttpGet(string.format("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=100", game.PlaceId))
 
-serverList = game.HttpService:JSONDecode(serverList).data
+serverList = HttpService:JSONDecode(serverList).data
 
 TeleportService:TeleportToPlaceInstance(game.PlaceId, serverList[math.random(1, #serverList)].id, client)
