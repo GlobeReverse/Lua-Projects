@@ -1,1 +1,0 @@
---# Im Lazy And Will Do This Later, Just Look At The [Example](https://github.com/GlobeReverse/Lua/blob/main/Moonlight%20Library/Example.lua)
