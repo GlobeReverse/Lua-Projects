@@ -70,7 +70,7 @@ for instance, data in pairs(doors) do
     fireTable:FireServer(converstion.OpenDoor1, "Door", {
         Source = instance:FindFirstChild("Closed"),
         Volume = 5
-    })
+    });
 
     fireTable:FireServer(converstion.OpenDoor2, data);
 end
