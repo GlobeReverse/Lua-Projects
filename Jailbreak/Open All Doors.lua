@@ -14,7 +14,7 @@ local converstion: { [string]: string } = {
 }
 
 --// Garbage Collector
-for _, value in pairs(getgc(true)) do 
+for _, value: any in pairs(getgc(true)) do 
     if (typeof(value) == "table") then 
         local fireServer: any = rawget(value, "FireServer");
 
