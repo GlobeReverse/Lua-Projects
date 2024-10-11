@@ -61,7 +61,7 @@ end
 
 --// Handling
 RunService.RenderStepped:Connect(function()
-    local target = closetPlayer(15);
+    local target = closetPlayer(20);
 
     if target then 
         arrestPlayer(target);
