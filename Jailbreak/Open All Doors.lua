@@ -1,9 +1,6 @@
 --[[
-    Heavily unoptimised 😉😉😉😎😎
+   Love FPS 😉😉😉😎😎
 ]]
-
---// Services
-local Workspace: Workspace = game:GetService("Workspace");
 
 --// Variables
 local doors: { [Instance]: any } = {};
@@ -27,49 +24,27 @@ for _, value in pairs(getgc(true)) do
 
         for _, val: any in pairs(value) do 
             if (typeof(val) == "table") then 
-                local OpenFun: any = rawget(val, "OpenFun");
                 local Model: any = rawget(val, "Model");
-                local AwaitingDoorOpen: any = rawget(val, "AwaitingDoorOpen");
+                local doorMaid: any = rawget(val, "doorMaid");
 
-                if OpenFun and Model and AwaitingDoorOpen then 
-                    pluh = value;
+                if Model and doorMaid then 
+                    doors[Model] = val;
                 end
             end
         end
     end
 end
 
---// Functions
-local function getFromDoor(door: Instance): any
-    for _, value in pairs(pluh) do 
-        if (typeof(value) == "table") then 
-            local model = rawget(value, "Model");
-
-            if (model == door) then 
-                return value;
-            end
-        end
-    end
-
-    return;
-end
-
 --// Handling
-for _, instance in pairs(Workspace:GetDescendants()) do 
-    if (instance.ClassName == "Model") and string.find(instance.Name, "Door") then 
-        local data = getFromDoor(instance);
-
-        if data then 
-            doors[instance] = data;
+for instance, data: any in pairs(doors) do 
+    task.spawn(function()
+        while task.wait(0.1) do 
+            fireTable:FireServer(converstion.OpenDoor1, "Door", {
+                Source = instance:FindFirstChild("Closed"),
+                Volume = 0.2
+            });
+        
+            fireTable:FireServer(converstion.OpenDoor2, data);
         end
-    end
-end
-
-for instance, data in pairs(doors) do 
-    fireTable:FireServer(converstion.OpenDoor1, "Door", {
-        Source = instance:FindFirstChild("Closed"),
-        Volume = 5
-    });
-
-    fireTable:FireServer(converstion.OpenDoor2, data);
+    end)
 end
