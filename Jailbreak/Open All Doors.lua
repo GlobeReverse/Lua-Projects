@@ -19,17 +19,17 @@ local converstion: { [string]: string } = {
 --// Garbage Collector
 for _, value in pairs(getgc(true)) do 
     if (typeof(value) == "table") then 
-        local fireServer = rawget(value, "FireServer");
+        local fireServer: any = rawget(value, "FireServer");
 
         if fireServer then 
             fireTable = value;
         end
 
-        for _, val in pairs(value) do 
+        for _, val: any in pairs(value) do 
             if (typeof(val) == "table") then 
-                local OpenFun = rawget(val, "OpenFun");
-                local Model = rawget(val, "Model");
-                local AwaitingDoorOpen = rawget(val, "AwaitingDoorOpen");
+                local OpenFun: any = rawget(val, "OpenFun");
+                local Model: any = rawget(val, "Model");
+                local AwaitingDoorOpen: any = rawget(val, "AwaitingDoorOpen");
 
                 if OpenFun and Model and AwaitingDoorOpen then 
                     pluh = value;
@@ -40,7 +40,7 @@ for _, value in pairs(getgc(true)) do
 end
 
 --// Functions
-local function getFromDoor(door)
+local function getFromDoor(door: Instance): any
     for _, value in pairs(pluh) do 
         if (typeof(value) == "table") then 
             local model = rawget(value, "Model");
