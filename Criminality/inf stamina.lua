@@ -1,12 +1,6 @@
--- easiest method
-for index, value in pairs(getgc()) do 
-    if typeof(value) == "function" then 
-        local debuginfo = debug.getinfo(value)
+local cloned = getrenv()._G.S_Get;
+local original = debug.getupvalue(cloned, 1);
 
-        if (debuginfo.name == "S_Get") then 
-            hookfunction(value, function(...)
-                return 100, 100
-            end)
-        end
-    end
-end
+hookfunction(original, function()
+    return 100, 100;
+end)
