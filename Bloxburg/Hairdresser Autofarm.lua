@@ -72,7 +72,7 @@ while task.wait() do
                     if (customer.Humanoid.FloorMaterial == Enum.Material.Air) then 
                         ignore[customer] = true;
 
-                        task.wait(0.25)
+                        task.wait(0.25);
 
                         fireServer("JobCompleted", { Type = "JobCompleted", Workstation = station, Order = { customer.Order.Style.Value, customer.Order.Color.Value } });
                     end
