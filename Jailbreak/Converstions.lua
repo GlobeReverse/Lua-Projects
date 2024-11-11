@@ -1,8 +1,9 @@
 --// All in 1 file making it easier to update for me
+--# Fuck you jailbreak for updating these
 return {
-    ["EnterVehicle"] = ("q" .. "" .. ("m1dpq1mw"):sub(2, 4):reverse():reverse():reverse() .. "" .. "" .. ("cv0z8hd4"):sub(5, 6):reverse():reverse():reverse() .. "" .. "fy"),
+    ["EnterVehicle"] = ("y" .. ("y1xj"):sub(3, 3):reverse() .. "" .. "" .. ("v2w1svso"):sub(5, 7):reverse() .. "" .. "" .. ("psg3o6fh"):sub(3, 4):reverse():reverse():reverse():reverse():reverse() .. "" .. "6"),
     ["ArrestPlayer"] = ("m" .. "drpflok"),
-    ["FallDamage"] = ("g" .. ("ptakw9b4"):sub(2, 4):reverse():reverse():reverse() .. "" .. "" .. ("t5hkoox"):sub(4, 6):reverse() .. "" .. "p"),
-    ["OpenDoor1"] = ("t" .. ("cwesvdm"):sub(3, 4):reverse():reverse():reverse():reverse():reverse() .. "" .. "" .. ("iwqikhzhj"):sub(5, 7):reverse():reverse():reverse():reverse():reverse() .. "" .. "" .. ("ldrdyvui"):sub(4, 4):reverse():reverse():reverse():reverse():reverse() .. "" .. "e"),
-    ["OpenDoor2"] = ("l" .. ("h0eiufvnz"):sub(5, 5):reverse():reverse():reverse() .. "" .. "" .. ("ajjjppo"):sub(5, 5):reverse():reverse():reverse() .. "" .. "" .. ("hubfdo"):sub(3, 5):reverse():reverse():reverse():reverse():reverse() .. "" .. "1a")
+    ["FallDamage"] = ("u" .. "d9gk5t9"),
+    ["OpenDoor1"] = ("z" .. ("v2dvr"):sub(3, 3):reverse():reverse():reverse() .. "" .. "" .. ("o3cfglk"):sub(5, 5):reverse():reverse():reverse() .. "" .. "" .. ("q06dc9gu"):sub(2, 4):reverse():reverse():reverse() .. "" .. "s3"),
+    ["OpenDoor2"] = ("p" .. "" .. ("bxggai4btkr"):sub(3, 8):reverse() .. "" .. "p")
 };
