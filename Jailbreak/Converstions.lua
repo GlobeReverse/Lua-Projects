@@ -1,3 +1,4 @@
+--// All in 1 file making it easier to update for me
 return {
     ["EnterVehicle"] = ("q" .. "" .. ("m1dpq1mw"):sub(2, 4):reverse():reverse():reverse() .. "" .. "" .. ("cv0z8hd4"):sub(5, 6):reverse():reverse():reverse() .. "" .. "fy"),
     ["ArrestPlayer"] = ("m" .. "drpflok"),
