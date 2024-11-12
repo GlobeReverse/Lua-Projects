@@ -6,6 +6,8 @@ for _, value: any in pairs(getgc(true)) do
             local original; original = hookfunction(xf1lrqfq, function(Nitro, NitroLastMax)
                 return original(5400, 5400);
             end)
+
+            return;
         end
     end
 end
