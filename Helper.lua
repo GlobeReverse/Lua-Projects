@@ -22,9 +22,6 @@ getgenv().disconnectSignal = function(signal)
     end
 end
 
-httpget("fieldofview")();
-getgenv().highlight = httpget("highlight")();
-
 if (not LPH_OBFUSCATED) then 
     LPH_OBFUSCATED = false;
 
