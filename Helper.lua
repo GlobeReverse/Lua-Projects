@@ -67,4 +67,6 @@ if (not LPH_OBFUSCATED) then
 
         while true do end;
     end
+
+    LPH_JIT_MAX = LPH_JIT
 end
