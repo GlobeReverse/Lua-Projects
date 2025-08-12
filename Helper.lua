@@ -46,3 +46,7 @@ if (not LPH_OBFUSCATED) then
 
     LPH_JIT_MAX = LPH_JIT
 end
+
+getgenv().LibraryToggleValue = function(idx) return Toggles[idx] and Toggles[idx].Value or false end;
+getgenv().LibraryOptionValue = function(idx) return Options[idx] and Options[idx].Value or false end;
+getgenv().LibraryDropdownValue = function(dropdown, idx) return Options[dropdown].Value[idx] end;
