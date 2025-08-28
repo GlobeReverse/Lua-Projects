@@ -1,6 +1,6 @@
 --# Variables
 local arguments = {...};
-local self = arguments[1] and arguments[1].self
+local self = arguments[1] and arguments[1].self;
 local date = os.date("*t", os.time());
 
 local formattedDay = tostring(date.day):len() == 1 and "0" .. date.day or date.day;
