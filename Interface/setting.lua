@@ -1,3 +1,10 @@
+--# Variables
+local date = os.date("*t", os.time());
+
+local formattedDay = tostring(date.day):len() == 1 and "0" .. date.day or date.day;
+local formattedMonth = tostring(date.month):len() == 1 and "0" .. date.month or date.month;
+local formattedYear = tostring(date.year):sub(3, 4);
+
 --# Helper Functions
 local function getTab(tabName)
 	for _, tab in pairs(self.tabs) do
@@ -35,10 +42,6 @@ local settings = getTab(self, "Settings") do
                 elseif (value == "Game Name") then 
                     Date.Text = gameName
                 else 
-                    local formattedDay = tostring(date.day):len() == 1 and "0" .. date.day or date.day;
-                    local formattedMonth = tostring(date.month):len() == 1 and "0" .. date.month or date.month;
-                    local formattedYear = tostring(date.year):sub(3, 4);
-
                     Date.Text = string.format("[%s/%s/%s]", formattedDay, formattedMonth, formattedYear);
                 end
             end})
