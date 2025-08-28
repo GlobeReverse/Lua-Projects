@@ -60,11 +60,19 @@ local function saveConfig(name)
         end
 
         for index, value in pairs(getgenv().Options) do 
-            table.insert(data, { 
-                Index = value.Idx,
-                Value = value.Value,
-                Type = value.Type
-            })
+            if (value.Type == "ColorPicker") then 
+                table.insert(data, { 
+                    Index = value.Idx,
+                    Value = value.Hex,
+                    Type = value.Type
+                });
+            else 
+                table.insert(data, { 
+                    Index = value.Idx,
+                    Value = value.Value,
+                    Type = value.Type
+                });
+            end
         end
 
         data = HttpService:JSONEncode(data);
