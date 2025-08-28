@@ -1,6 +1,8 @@
 --# Variables
 local arguments = {...};
 local self = arguments[1] and arguments[1].self;
+local callback = arguments[1] and arguments[1].callback;
+
 local date = os.date("*t", os.time());
 
 local formattedDay = tostring(date.day):len() == 1 and "0" .. date.day or date.day;
@@ -25,7 +27,7 @@ local settings = getTab("Settings") do
             menuSettings:AddSlider({ Title = "Toggle Duration", prefix = "ms", Min = 1, Max = 2000, Default = 500, Callback = function(value) self.toggleTweenDuration = (value / 1000) end });
             menuSettings:AddBind({ Title = "Toggle Menu", Flag = "ToggleMenu", Default = Enum.KeyCode.Insert, Callback = function() self:toggleInterface() end});
             menuSettings:AddToggle({ Title = "Watermark", Flag = "WatermarkEnabled", Callback = function(value) self:setWatermarkProperty("Visible", value) end });
-            menuSettings:AddBind({ Title = "Unload", Flag = "UnloadMenu", Default = Enum.KeyCode.Unknown, Callback = function() self:Unload() end});
+            menuSettings:AddBind({ Title = "Unload", Flag = "UnloadMenu", Default = Enum.KeyCode.Unknown, Callback = function() self:Unload(callback) end});
         end
 
         local MoonlightSettings = configuration:AddRightGroupbox() do 
