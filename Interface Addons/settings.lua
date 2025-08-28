@@ -24,7 +24,7 @@ end
 local settings = getTab("Settings") do 
     local configuration = settings:AddSection("Interface") do 
         local menuSettings = configuration:AddLeftGroupbox() do 
-            menuSettings:AddSlider({ Title = "Toggle Duration", prefix = "ms", Min = 1, Max = 2000, Default = 500, Callback = function(value) self.toggleTweenDuration = (value / 1000) end });
+            menuSettings:AddSlider({ Title = "Toggle Duration", Suffix = "ms", Min = 1, Max = 2000, Default = 500, Callback = function(value) self.toggleTweenDuration = (value / 1000) end });
             menuSettings:AddBind({ Title = "Toggle Menu", Flag = "ToggleMenu", Default = Enum.KeyCode.Insert, Callback = function() self:toggleInterface() end});
             menuSettings:AddToggle({ Title = "Watermark", Flag = "WatermarkEnabled", Callback = function(value) self:setWatermarkProperty("Visible", value) end });
             menuSettings:AddBind({ Title = "Unload", Flag = "UnloadMenu", Default = Enum.KeyCode.Unknown, Callback = function() self:Unload(callback) end});
