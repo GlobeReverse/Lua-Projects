@@ -19,7 +19,7 @@ local function getTab(tabName)
 end
 
 --# Section
-local settings = getTab(self, "Settings") do 
+local settings = getTab("Settings") do 
     local configuration = settings:AddSection("Interface") do 
         local menuSettings = configuration:AddLeftGroupbox() do 
             menuSettings:AddSlider({ Title = "Toggle Duration", prefix = "ms", Min = 1, Max = 2000, Default = 500, Callback = function(value) self.toggleTweenDuration = (value / 1000) end });
