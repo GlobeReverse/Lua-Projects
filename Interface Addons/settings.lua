@@ -1,7 +1,7 @@
 --# Variables
 local arguments = {...};
 local self = arguments[1] and arguments[1].self;
-local callback = arguments[1] and arguments[1].callback;
+local callback = arguments[1] and arguments[1].data;
 
 local date = os.date("*t", os.time());
 
