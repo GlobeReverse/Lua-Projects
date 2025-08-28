@@ -156,7 +156,7 @@ end
 --# Section
 setFolders();
 
-local settings = getTab(self, "Settings") do
+local settings = getTab("Settings") do
     local configSection = settings:AddSection("Configs") do 
         local createConfig = configSection:AddLeftGroupbox() do 
             local configName = createConfig:AddInput({ Title = "Config Name", Flag = "Config_Name" });
