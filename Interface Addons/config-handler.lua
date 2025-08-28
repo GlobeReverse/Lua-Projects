@@ -2,9 +2,6 @@
 local arguments = {...};
 local self = arguments[1] and arguments[1].self;
 
-warn("self");
-warn(self);
-
 --# Helper Functions
 local function getTab(tabName)
 	for _, tab in pairs(self.tabs) do
