@@ -1,4 +1,14 @@
 --# Helper Functions
+local function getTab(tabName)
+	for _, tab in pairs(self.tabs) do
+		if (tab.name == tabName) then
+			return tab;
+		end
+	end
+
+	return self:AddTab(tabName);
+end
+
 local function setFolders()
     if (isfolder(self.scriptName) ~= true) then 
         makefolder(self.scriptName);
