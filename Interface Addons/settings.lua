@@ -40,11 +40,11 @@ local settings = getTab("Settings") do
 
             MoonlightSettings:AddDropdown({ Title = "Right Hand Text", Flag = "Right_Hand_Text", Values = availableHandText, Default = "Current Date", Callback = function(value)
                 if (value == "Execution Count") then 
-                    Date.Text = string.format("%s executions", ML_TotalExecutions);
+					self:setRightHandText(string.format("%s executions", ML_TotalExecutions));
                 elseif (value == "Game Name") then 
-                    Date.Text = gameName
+                    self:setRightHandText(gameName);
                 else 
-                    Date.Text = string.format("[%s/%s/%s]", formattedDay, formattedMonth, formattedYear);
+                    self:setRightHandText(string.format("[%s/%s/%s]", formattedDay, formattedMonth, formattedYear));
                 end
             end})
         end
