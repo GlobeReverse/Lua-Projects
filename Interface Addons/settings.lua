@@ -44,7 +44,7 @@ local settings = getTab("Settings") do
                 if (value == "Execution Count") then 
 					self:setRightHandText(string.format("%s executions", ML_TotalExecutions));
                 elseif (value == "Game Name") then 
-                    self:setRightHandText(gameName);
+                    self:setRightHandText(self.gameName);
                 else 
                     self:setRightHandText(string.format("[%s/%s/%s]", formattedDay, formattedMonth, formattedYear));
                 end
