@@ -20,16 +20,6 @@ local function getTab(tabName)
 	return self:AddTab(tabName);
 end
 
-local function updateWatermark()
-    local watermarkVisible = LibraryToggleValue("WatermarkEnabled");
-    
-    if watermarkVisible then 
-        local watermarkText = string.format()
-    end
-
-    self:setWatermarkProperty("Visible", watermarkVisible);
-end
-
 --# Section
 local settings = getTab("Settings") do 
     local configuration = settings:AddSection("Interface") do 
@@ -40,7 +30,7 @@ local settings = getTab("Settings") do
             menuSettings:AddDivider();
 
             menuSettings:AddToggle({ Title = "Watermark", Flag = "WatermarkEnabled", Callback = function(value) self:setWatermarkProperty("Visible", value) end });
-            menuSettings:AddMultidropdown({ Title = "Watermark Contents", Flag = "WatermarkContents", Values = "Script Version", "Game Name", "Fps", "Ping", "Discord Id", Value = { "Script Version" }, Default = { "Script Version", "Game Name", "Fps", "Ping" }, Callback = function() updateWatermark() end });
+            menuSettings:AddMultidropdown({ Title = "Watermark Contents", Flag = "WatermarkContents", Values = { "Script Version", "Game Name", "Fps", "Ping", "Discord Id" }, Default = { "Script Version", "Game Name", "Fps", "Ping" } });
 
             menuSettings:AddDivider();
 
