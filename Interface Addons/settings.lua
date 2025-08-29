@@ -50,7 +50,7 @@ local settings = getTab("Settings") do
                         end
 
                         if LibraryOptionValue("WatermarkContents")["Fps"] then
-                            table.insert(selectedContents, tostring(math.round(1 / RunService.Heartbeat:wait()))); 
+                            table.insert(selectedContents, string.format("%s fps", tostring(math.round(1 / RunService.Heartbeat:wait())))); 
                         end
 
                         if LibraryOptionValue("WatermarkContents")["Ping"] then
