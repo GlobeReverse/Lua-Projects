@@ -20,14 +20,61 @@ local function getTab(tabName)
 	return self:AddTab(tabName);
 end
 
+local function updateWatermark()
+    local watermarkVisible = LibraryToggleValue("WatermarkEnabled");
+    
+    if watermarkVisible then 
+        local watermarkText = string.format()
+    end
+
+    self:setWatermarkProperty("Visible", watermarkVisible);
+end
+
 --# Section
 local settings = getTab("Settings") do 
     local configuration = settings:AddSection("Interface") do 
         local menuSettings = configuration:AddLeftGroupbox() do 
             menuSettings:AddSlider({ Title = "Toggle Duration", Suffix = "ms", Min = 1, Max = 2000, Default = 500, Callback = function(value) self.toggleTweenDuration = (value / 1000) end });
             menuSettings:AddBind({ Title = "Toggle Menu", Flag = "ToggleMenu", Default = Enum.KeyCode.Insert, Callback = function() self:toggleInterface() end});
+
+            menuSettings:AddDivider();
+
             menuSettings:AddToggle({ Title = "Watermark", Flag = "WatermarkEnabled", Callback = function(value) self:setWatermarkProperty("Visible", value) end });
+            menuSettings:AddMultidropdown({ Title = "Watermark Contents", Flag = "WatermarkContents", Values = "Script Version", "Game Name", "Fps", "Ping", "Discord Id", Value = { "Script Version" }, Default = { "Script Version", "Game Name", "Fps", "Ping" }, Callback = function() updateWatermark() end });
+
+            menuSettings:AddDivider();
+
             menuSettings:AddBind({ Title = "Unload", Flag = "UnloadMenu", Default = Enum.KeyCode.Unknown, Callback = function() self:Unload(callback) end});
+
+            task.spawn(function()
+                while task.wait(1) do 
+                    if LibraryToggleValue("WatermarkEnabled") then
+                        local selectedContents = {};
+
+                        if LibraryOptionValue("WatermarkContents")["Script Version"] then
+                            table.insert(selectedContents, "V6.0 Public"); 
+                        end
+
+                        if LibraryOptionValue("WatermarkContents")["Game Name"] then
+                            table.insert(selectedContents, self.gameName); 
+                        end
+
+                        if LibraryOptionValue("WatermarkContents")["Fps"] then
+                            table.insert(selectedContents, tostring(math.round(1 / RunService.Heartbeat:wait()))); 
+                        end
+
+                        if LibraryOptionValue("WatermarkContents")["Ping"] then
+                            table.insert(selectedContents, string.format("%sms", tostring(math.round(Players.LocalPlayer:GetNetworkPing() * 1000))));
+                        end
+
+                        if LibraryOptionValue("WatermarkContents")["Discord Id"] then
+                            table.insert(selectedContents, ML_DiscordID);
+                        end
+
+                        self:setWatermarkProperty("Text", string.format("%s | %s", self.scriptName, table.concat(selectedContents, " | ")));
+                    end
+                end
+            end);
         end
 
         local MoonlightSettings = configuration:AddRightGroupbox() do 
