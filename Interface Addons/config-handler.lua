@@ -162,7 +162,7 @@ end
 setFolders();
 
 if isfile(string.format("%s/%s/Configs/autoload.txt", self.scriptName, gameName)) then 
-	loadConfigF(readfile(string.format("%s/%s/Configs/autoload.txt", self.scriptName, gameName)));
+	loadConfigF(readfile(string.format("%s/%s/Configs/autoload.txt", self.scriptName, self.gameName)));
 end
 
 local settings = getTab("Settings") do
