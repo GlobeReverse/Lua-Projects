@@ -161,6 +161,10 @@ end
 --# Section
 setFolders();
 
+if isfile(string.format("%s/%s/Configs/autoload.txt", self.scriptName, gameName)) then 
+	loadConfigF(readfile(string.format("%s/%s/Configs/autoload.txt", self.scriptName, gameName)));
+end
+
 local settings = getTab("Settings") do
     local configSection = settings:AddSection("Configs") do 
         local createConfig = configSection:AddLeftGroupbox() do 
