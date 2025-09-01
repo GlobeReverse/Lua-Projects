@@ -34,7 +34,7 @@ local settings = getTab("Settings") do
 
             menuSettings:AddDivider();
 
-            menuSettings:AddBind({ Title = "Unload", Flag = "UnloadMenu", Default = Enum.KeyCode.Unknown, Callback = function() self:Unload(callback) end});
+            menuSettings:AddBind({ Title = "Unload", Flag = "UnloadMenu", Default = Enum.KeyCode.Unknown, Callback = function() self:unload(callback) end});
 
             task.spawn(function()
                 while task.wait(1) do 
