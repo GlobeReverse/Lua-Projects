@@ -32,7 +32,7 @@ local settings = getTab("Settings") do
 				menuSettings:AddButton({ Title = "Copy Discord", Callback = function() 
 					setclipboard("https://discord.gg/8ztPcA5Wr8");
 
-					notify("Discord link has been successfully set to clipboard")
+					notify("Discord link has been successfully set to clipboard", 5);
 				end });
 			end
 			
