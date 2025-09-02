@@ -24,6 +24,18 @@ end
 local settings = getTab("Settings") do 
     local configuration = settings:AddSection("Interface") do 
         local menuSettings = configuration:AddLeftGroupbox() do 
+			if discordModule then 
+				menuSettings:AddButton({ Title = "Join Discord", Callback = function() discordModule.Join("https://discord.gg/8ztPcA5Wr8") end });
+			end
+
+			if setclipboard then 
+				menuSettings:AddButton({ Title = "Copy Discord", Callback = function() 
+					setclipboard("https://discord.gg/8ztPcA5Wr8");
+
+					notify("Discord link has been successfully set to clipboard")
+				end });
+			end
+			
             menuSettings:AddSlider({ Title = "Toggle Duration", Suffix = "ms", Min = 1, Max = 2000, Default = 500, Callback = function(value) self.toggleTweenDuration = (value / 1000) end });
             menuSettings:AddBind({ Title = "Toggle Menu", Flag = "ToggleMenu", Default = Enum.KeyCode.Insert, Callback = function() self:toggleInterface() end});
 
