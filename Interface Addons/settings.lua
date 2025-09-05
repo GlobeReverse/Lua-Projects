@@ -30,7 +30,7 @@ local settings = getTab("Settings") do
 
 			if setclipboard then 
 				menuSettings:AddButton({ Title = "Copy Discord", Callback = function() 
-					setclipboard("https://discord.gg/8ztPcA5Wr8");
+					setclipboard("https://discord.moonlight.uno");
 
 					notify("Discord link has been successfully set to clipboard", 5);
 				end });
