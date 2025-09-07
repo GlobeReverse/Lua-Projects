@@ -12,7 +12,7 @@ local self = arguments[1] and arguments[1].self;
 local dragging, dragInput, dragStart, startPos = false;
 
 --// Functions
-local function update(input)
+local function update(input, ToggleButton)
     local delta = (input.Position - dragStart);
     
     ToggleButton.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y);
@@ -85,7 +85,11 @@ do
 
     interfaceAddSignal(UserInputService.InputChanged, function(input)
         if (input == dragInput) and dragging then
-            update(input);
+            update(input, ToggleButton);
         end
     end);
+end
+
+getgenv().ToggleMobileButton = function()
+    ToggleButton.Visible = not ToggleButton.Visible;
 end
