@@ -7,7 +7,6 @@ local CoreGui = service("CoreGui");
 
 --// Variables
 local arguments = {...};
-local interfaceName = arguments[1] and arguments[1].interfaceName;
 local addSignal = arguments[1] and arguments[1].addSignal;
 local self = arguments[1] and arguments[1].self; 
 
@@ -21,7 +20,6 @@ local function update(input)
 end
 
 --// Checks
-assert(typeof(interfaceName) == "string", "argument #1 interfaceName string expected");
 assert(typeof(addSignal) == "function", "argument #2 addSignal function expected");
 assert(typeof(self) == "table", "argument #3 self table expected");
 
@@ -35,7 +33,7 @@ local UICorner = Instance.new("UICorner");
 --// Properties
 do 
     ToggleButton.Name = "ToggleButton";
-    ToggleButton.Parent = CoreGui:FindFirstChild(interfaceName);
+    ToggleButton.Parent = CoreGui:FindFirstChild(self.scriptName);
     ToggleButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
     ToggleButton.BorderColor3 = Color3.fromRGB(0, 0, 0);
     ToggleButton.BorderSizePixel = 0;
