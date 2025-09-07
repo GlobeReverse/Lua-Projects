@@ -49,7 +49,7 @@ local settings = getTab("Settings") do
             menuSettings:AddDivider();
 
             menuSettings:AddButton({ Title = "Load Mobile Button", Callback = function() 
-                if CoreGui:FindFirstChild(self.scriptName) then 
+                if CoreGui:FindFirstChild(self.scriptName):FindFirstChild("ToggleButton") then 
                     getgenv().ToggleMobileButton();
 
                     return;
