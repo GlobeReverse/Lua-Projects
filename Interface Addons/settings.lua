@@ -9,6 +9,8 @@ local formattedDay = tostring(date.day):len() == 1 and "0" .. date.day or date.d
 local formattedMonth = tostring(date.month):len() == 1 and "0" .. date.month or date.month;
 local formattedYear = tostring(date.year):sub(3, 4);
 
+local runCooldown = (tick() - 1);
+
 --# Helper Functions
 local function getTab(tabName)
 	for _, tab in pairs(self.tabs) do
@@ -46,36 +48,38 @@ local settings = getTab("Settings") do
 
             menuSettings:AddDivider();
 
+            menuSettings:AddButton({ Title = "Load Mobile Button", Callback = function() 
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/GlobeReverse/Lua-Projects/refs/heads/main/Interface%20Addons/mobile-button.lua"))({ self = self });
+            end })
             menuSettings:AddBind({ Title = "Unload", Flag = "UnloadMenu", Default = Enum.KeyCode.Unknown, Callback = function() self:unload(callback) end});
 
-            task.spawn(function()
-                while task.wait(1) do 
-                    if LibraryToggleValue("WatermarkEnabled") then
-                        local selectedContents = {};
+            interfaceAddSignal(RunService.RenderStepped, function()
+                if (tick() - runCooldown) < 1 then return end;
+                runCooldown = tick();
 
-                        if LibraryOptionValue("WatermarkContents")["Script Version"] then
-                            table.insert(selectedContents, "V6.0 Public"); 
-                        end
+                local selectedContents = {};
 
-                        if LibraryOptionValue("WatermarkContents")["Game Name"] then
-                            table.insert(selectedContents, self.gameName); 
-                        end
-
-                        if LibraryOptionValue("WatermarkContents")["Fps"] then
-                            table.insert(selectedContents, string.format("%s fps", tostring(math.round(1 / RunService.Heartbeat:wait())))); 
-                        end
-
-                        if LibraryOptionValue("WatermarkContents")["Ping"] then
-                            table.insert(selectedContents, string.format("%sms", tostring(math.round(Players.LocalPlayer:GetNetworkPing() * 1000))));
-                        end
-
-                        if LibraryOptionValue("WatermarkContents")["Discord Id"] then
-                            table.insert(selectedContents, ML_DiscordID);
-                        end
-
-                        self:setWatermarkProperty("Text", string.format("%s | %s", self.scriptName, table.concat(selectedContents, " | ")));
-                    end
+                if LibraryOptionValue("WatermarkContents")["Script Version"] then
+                    table.insert(selectedContents, "V6.0 Public"); 
                 end
+
+                if LibraryOptionValue("WatermarkContents")["Game Name"] then
+                    table.insert(selectedContents, self.gameName); 
+                end
+
+                if LibraryOptionValue("WatermarkContents")["Fps"] then
+                    table.insert(selectedContents, string.format("%s fps", tostring(math.round(1 / RunService.Heartbeat:wait())))); 
+                end
+
+                if LibraryOptionValue("WatermarkContents")["Ping"] then
+                    table.insert(selectedContents, string.format("%sms", tostring(math.round(Players.LocalPlayer:GetNetworkPing() * 1000))));
+                end
+
+                if LibraryOptionValue("WatermarkContents")["Discord Id"] then
+                    table.insert(selectedContents, ML_DiscordID);
+                end
+
+                self:setWatermarkProperty("Text", string.format("%s | %s", self.scriptName, table.concat(selectedContents, " | ")));
             end);
         end
 
