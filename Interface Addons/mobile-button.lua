@@ -7,7 +7,6 @@ local CoreGui = service("CoreGui");
 
 --// Variables
 local arguments = {...};
-local addSignal = arguments[1] and arguments[1].addSignal;
 local self = arguments[1] and arguments[1].self; 
 
 local dragging, dragInput, dragStart, startPos = false;
@@ -20,8 +19,7 @@ local function update(input)
 end
 
 --// Checks
-assert(typeof(addSignal) == "function", "argument #2 addSignal function expected");
-assert(typeof(self) == "table", "argument #3 self table expected");
+assert(typeof(self) == "table", "argument #1 self table expected");
 
 --// Creating Instances
 local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint");
@@ -59,19 +57,19 @@ end
 
 --// Signals
 do 
-    addSignal(ToggleButton.MouseButton1Click, function()
+    interfaceAddSignal(ToggleButton.MouseButton1Click, function()
         self:toggleInterface();
     end);
 
    --
 
-    addSignal(ToggleButton.InputBegan, function(input)
+    interfaceAddSignal(ToggleButton.InputBegan, function(input)
         if (input.UserInputType == Enum.UserInputType.MouseButton1) or (input.UserInputType == Enum.UserInputType.Touch) then
             dragging = true;
             dragStart = input.Position;
             startPos = ToggleButton.Position;
 
-            addSignal(input.Changed, function()
+            interfaceAddSignal(input.Changed, function()
                 if (input.UserInputState == Enum.UserInputState.End) then
                     dragging = false;
                 end
@@ -79,13 +77,13 @@ do
         end
     end);
 
-    addSignal(ToggleButton.InputChanged, function(input)
+    interfaceAddSignal(ToggleButton.InputChanged, function(input)
         if (input.UserInputType == Enum.UserInputType.MouseMovement) or (input.UserInputType == Enum.UserInputType.Touch) then
             dragInput = input;
         end
     end);
 
-    addSignal(UserInputService.InputChanged, function(input)
+    interfaceAddSignal(UserInputService.InputChanged, function(input)
         if (input == dragInput) and dragging then
             update(input);
         end
