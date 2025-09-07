@@ -49,6 +49,12 @@ local settings = getTab("Settings") do
             menuSettings:AddDivider();
 
             menuSettings:AddButton({ Title = "Load Mobile Button", Callback = function() 
+                if CoreGui:FindFirstChild(self.scriptName) then 
+                    getgenv().ToggleMobileButton();
+
+                    return;
+                end
+
                 loadstring(game:HttpGet("https://raw.githubusercontent.com/GlobeReverse/Lua-Projects/refs/heads/main/Interface%20Addons/mobile-button.lua"))({ self = self });
             end })
             menuSettings:AddBind({ Title = "Unload", Flag = "UnloadMenu", Default = Enum.KeyCode.Unknown, Callback = function() self:unload(callback) end});
