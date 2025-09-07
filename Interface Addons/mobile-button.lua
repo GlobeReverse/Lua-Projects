@@ -1,5 +1,5 @@
 --// Services
-local service = setmetatable({ cloneref, game.GetService }, { __call = function(self, service) return self[1] and self[1](self[2](self[2], service)) or self[2](self[2], service) end });
+local service = setmetatable({ cloneref or function(service) return service end, game }, { __call = function(self, idx) return self[1](self[2].GetService(self[2], idx)) end });
 
 local UserInputService = service("UserInputService");
 local RunService = service("RunService");
