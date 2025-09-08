@@ -85,7 +85,7 @@ local function saveConfig(name)
     end
 end
 
-local function loadConfigF(name) 
+--[[local function loadConfigF(name) 
 	if set_thread_identity then 
 		set_thread_identity(8);
 	end
@@ -130,6 +130,49 @@ local function loadConfigF(name)
             if (not success) then 
                 warn(string.format("Error Loading Config: %s (%s)", tostring(error), value.Index));
             end
+        end
+    end
+end]]
+
+local function loadConfigF(name) 
+	if set_thread_identity then 
+		set_thread_identity(8);
+	end
+	
+    setFolders();
+
+    name = tostring(name);
+
+    if (name and (name:len() >= 1)) then 
+        local configName = string.format("%s/%s/Configs/%s.json", self.scriptName, self.gameName, name:gsub(".json", ""));
+
+        if (isfile(configName) ~= true) then 
+            return self:notify("Config dosen't exist", 4);
+        end
+
+        local data = readfile(configName);
+
+        data = HttpService:JSONDecode(data);
+
+        for _, value in pairs(data) do 
+			if (value.Type == "Toggle") then 
+				if getgenv().Toggles[value.Index] then 
+					getgenv().Toggles[value.Index].functions.setValue(value.Value);
+				end
+			else 
+				local option = getgenv().Options[value.Index];
+
+				if (not option) then return end;
+				if (not value.Value) then return end;
+
+				if (option.Type == "ColorPicker") then 
+					option.functions.setValue(Color3.fromHex(value.Value));
+				elseif (option.Type == "Slider") then 
+					option.functions.setValue(tonumber(value.Value));
+				else 
+					option.functions.setValue(value.Value);
+				end
+			end
         end
     end
 end
