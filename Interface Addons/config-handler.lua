@@ -44,6 +44,10 @@ local function getConfigs()
 end
 
 local function saveConfig(name)
+	if set_thread_identity then 
+		set_thread_identity(8);
+	end
+	
     setFolders();
 
     name = tostring(name);
@@ -82,6 +86,10 @@ local function saveConfig(name)
 end
 
 local function loadConfigF(name) 
+	if set_thread_identity then 
+		set_thread_identity(8);
+	end
+	
     setFolders();
 
     name = tostring(name);
