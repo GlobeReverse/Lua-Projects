@@ -113,8 +113,8 @@ local function loadConfigF(name)
 			else 
 				local option = getgenv().Options[value.Index];
 
-				if (not option) then return warn("1") end;
-				if (not value.Value) then return warn('2') end;
+				if (not option) then return end;
+				if (not value.Value) then return end;
 
 				if (option.Type == "ColorPicker") then 
 					option.functions.setValue(Color3.fromHex(value.Value));
